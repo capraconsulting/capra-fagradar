@@ -1,9 +1,9 @@
 name,ring,quadrant,isNew,description
-Microservice Architecture,Bruk,Software Engineering,FALSE,
+Microservice Architecture,1,Software Engineering,FALSE,
 Event Driven Architecture,2,Software Engineering,FALSE,There's absolutely nothing that is synchronous in this world
 Observability & monitoring,2,Software Engineering,FALSE,
 Data as first class citizen,3,Software Engineering,FALSE,
-Serverless Architecture,Bruk ,Software Engineering,FALSE,
+Serverless Architecture,1,Software Engineering,FALSE,
 Domain Driven Design,1,Software Engineering,FALSE,
 OpenAPI,1,Backend,FALSE,Api Documentation
 Postgres,1,Backend,FALSE,sql database
@@ -118,7 +118,6 @@ Test patterns,1,Frontend,FALSE,Prinsipp/arkitektur
 Design tokens,3,Frontend,FALSE,Prinsipp/arkitektur
 NPM,1,Frontend,FALSE,Byggsteg
 SCSS,4,Frontend,FALSE,CSS extension
-Deno,3,Frontend,FALSE,Runtime
 Playwright,3,Frontend,FALSE,Testrammeverk
 Less,4,Frontend,FALSE,CSS extension
 Jest,4,Frontend,FALSE,Testrammeverk
