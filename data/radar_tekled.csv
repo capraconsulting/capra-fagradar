@@ -1,0 +1,25 @@
+name,ring,quadrant,isNew,description
+Kanban,Nivå 1,Agile rammeverk,TRUE,"Kanban er sjelen i smidig utvikling, og våre teknologiledere har solid kunnskap og kompetanse om dette."
+Scrum,Nivå 4,Agile rammeverk,TRUE,Scrum er et populært og lettvektig rammeverk for smidig utvikling. Capras teknologiledere har god kunnskap og erfaring med dette. Samtidig mener vi at Scrum altfor ofte blir implementert og etterfulgt på en tungvint måte. Det finnes bedre rammeverk som fører til mer fart og flyt.
+SAFe,Nivå 3,Agile rammeverk,TRUE,"SAFe er et forsøk på å skalere agile prosesser på organisasjonsnivå. Det er populært i enkelte kretser. Vi Nivå 3r fortløpende om dette er et godt rammeverk eller ikke, men har ikke helt bestemt oss enda."
+LeSS,Nivå 3,Agile rammeverk,TRUE,LeSS (Large-Scale Scrum) er et forsøk på å skalere agile prosesser på organisasjonsnivå. Vi Nivå 3r fortløpende om dette er hensiktmessig å argumentere for hos våre kunder.
+,,,,
+Team Topologies,Nivå 1,Organisasjonsutvikling,TRUE,Team Topologies er kjernen i Capras visjon og filosofi.
+Flight Levels,Nivå 3,Organisasjonsutvikling,TRUE,"Flight Levels er et interessant konsept som påpeker viktigheten av å se på leveransetakt og arbeidskapasitet på tvers av virksomheten - både på teamnivå, organisasjonsnivå, og porteføljenivå. Vi er inspirert, og Nivå 3r hvordan dette skal tas med inn hos kunde!"
+Systems thinking,Nivå 3,Organisasjonsutvikling,TRUE,"Systemtenkning er på mange måter en forutsetning for å lykkes som teknologileder. Vi ønsker å lære mer, og reflektere om hvordan vi kan systematisere denne tankegangen i praksis."
+,,,,
+,,,,
+Psykologisk trygghet,Nivå 1,Ledelse,TRUE,"Psykologisk trygghet er grunnsteinen i et hvert team og enhvert organisasjon. Uten dette fungerer det ikke. Våre teknologiledere skal kunne vite hva det er, hvordan man oppnår det, og hvordan man beholder det."
+Situasjonsbasert ledelse,Nivå 2,Ledelse,TRUE,"Situasjonsbasert ledelse tar som utgangspunkt at det ikke finnes én riktig lederstil, men at gode ledere tilpasser stilen etter situasjonen. Er man inne i en krevende periode med mye usikkerhet og utydelige mål? Da må lederen brette opp ærmene og sette en tydelig retning med bestemthet og trygghet. Er man i en god periode, med selvdrevne team og inspirasjon og motivasjon i massevis? Da kan en mer fasiliterende og tilretteleggende lederstil ofte være det beste."
+Servant leadership,Nivå 3,Ledelse,TRUE,"Ledere er til for å tjene mederabeiderene sine, i følge denne filosofien. Vi synes det virker fornuftig, dog tenker vi at det til tider kan passivisere ledere og at det i verste fall kan føre til usikkerhet."
+OKR,Nivå 3,Ledelse,TRUE,"Objectives and Key Results er populært. Å bryte opp større, hårete mål i målbare biter som man kan angripe en og en virker fornuftig. Vi mener fokuset likevel bør ligge på å forankre et felles målbilde gjennom gode diskusjoner og samtaler, der alle forstår hva og hvorfor."
+X-wing modellen,Nivå 1,Ledelse,TRUE,X-wing modellen har mange likheter med situasjonsbasert ledelse (se annet punkt). Våre teknologiledere skal ha en større verktøykasse med teknikker og holdninger som de kan tilpasse situasjonen de står i.
+Teamkontrakter,Nivå 2,Ledelse,SANN,"En teamkontrakt er viktig. Det er enda viktigere å huske på at en teamkontrakt på papiret ikke er verdt noe som helst. Forankre, forankre, forankre! Gode, kontinuerlige, og trygge kaffesamtaler i hverdagen - det er der kontrakten oppstår."
+,,,,
+,,,,
+,,,,
+Trunk-basert utvikling,Nivå 1,Teknisk praksis,TRUE,"Trunk-basert utvikling korellerer sterkt med høytpresterende team. Det er også en forutsetning for skalerbare systemer og økt fart og flyt i arbeidet. Våre teknologiledere vet hva dette er, og kan argumentere godt for det."
+Test-Driven Development (TDD),Nivå 1,Teknisk praksis,TRUE,"Test-dreven utvikling gir teamet og interessentert trygghet i at ting fungerer som det skal. Det skaper også en omforent og tydeligere domeneforståelse. Vi heier på test-dreven utvikling, på tross av et noe frynsete rykte hos enkelte."
+Behaviour-Driven Development (BDD),Nivå 2,Teknisk praksis,TRUE,"Behaviour-Driven Development (BDD) er TDD på steroider. Vi tenker dette høres spennende ut, og våre teknologiledere kan nok om det til å Nivå 2 det ut dersom kundene våre ønsker dete."
+Continuous Discovery,Nivå 1,Teknisk praksis,TRUE,"Continuous Discovery (Kontinuerlig Oppdagelse av kundens behov), er så agilt som det kommer. Vi er aldri ferdige med å forstå sluttbrukeren, og teamene vi leder og organisasjonene vi jobber for skal ha de riktige forutsetningene og gode praksiser på å kontinuerlig fange opp behov og endringer i markedet."
+Domain-driven Design,Prøve,Teknisk praksis,TRUE,
