@@ -6,7 +6,7 @@ Lisensiert under AGPL-3.0.
 Dataen til fagraderen er her: https://docs.google.com/spreadsheets/d/1ijgKkGvDoHSC1DgF5oWlPRZQJvm23N5oz-ssY9ZJMRs
 
 ### Oppdater fagrader-data
-Dataene oppdateres i (https://www.notion.so/capra/eab66400679a4d48b6d0fa8920ee56e2?v=84f89f952c734786879adf92c6673c49)[Notion]
+Dataene oppdateres i [Notion](https://www.notion.so/capra/eab66400679a4d48b6d0fa8920ee56e2?v=84f89f952c734786879adf92c6673c49).
 Eksporter tabellen til csv og oppdater `data/radar.csv`.
 
 Det er viktig at kolonne-navnene forblir `name,ring,quadrant,isNew,description` og at dataen i `quadrant` og `ring`
