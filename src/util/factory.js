@@ -80,11 +80,26 @@ const plotRadar = function (title, blips, currentRadarName, alternativeRadars) {
   new GraphingRadar(size, radar).init().plot()
 }
 
-function validateInputQuadrantOrRingName(allQuadrantsOrRings, quadrantOrRing) {
-  const quadrantOrRingNames = Object.keys(allQuadrantsOrRings)
+function validateInputRingName(allRings, ring) {
+  const ringNames = Object.keys(allRings)
   const regexToFixLanguagesAndFrameworks = /(-|\s+)(and)(-|\s+)|\s*(&)\s*/g
-  const formattedInputQuadrant = quadrantOrRing.toLowerCase().replace(regexToFixLanguagesAndFrameworks, ' & ')
-  return quadrantOrRingNames.find((quadrantOrRing) => quadrantOrRing.toLowerCase() === formattedInputQuadrant)
+  const formattedInputRing = ring.toLowerCase().replace(regexToFixLanguagesAndFrameworks, ' & ')
+  return ringNames.find((ringName) => ringName.toLowerCase() === formattedInputRing)
+}
+
+function validateInputQuadrant(allQuadrants, quadrant) {
+  const quadrantNames = Object.keys(allQuadrants)
+  const regexToFixLanguagesAndFrameworks = /(-|\s+)(and)(-|\s+)|\s*(&)\s*/g
+  const formattedInputQuadrants = quadrant.toLowerCase().replace(regexToFixLanguagesAndFrameworks, ' & ')
+  const formattedInputQuadrantNames = formattedInputQuadrants
+    .split(',')
+    .map((formattedInputQuadrant) => formattedInputQuadrant.trim())
+
+  return quadrantNames.filter((quadrantName) =>
+    formattedInputQuadrantNames.some(
+      (formattedInputQuadrantName) => formattedInputQuadrantName === quadrantName.toLowerCase(),
+    ),
+  )
 }
 
 const plotRadarGraph = function (title, blips, currentRadarName, alternativeRadars) {
@@ -103,9 +118,10 @@ const plotRadarGraph = function (title, blips, currentRadarName, alternativeRada
   }, {})
 
   blips.forEach((blip) => {
-    const currentQuadrant = validateInputQuadrantOrRingName(quadrants, blip.quadrant)
-    const ring = validateInputQuadrantOrRingName(ringMap, blip.ring)
-    if (currentQuadrant && ring) {
+    const currentQuadrants = validateInputQuadrant(quadrants, blip.quadrant)
+    const ring = validateInputRingName(ringMap, blip.ring)
+
+    if (currentQuadrants.length && ring) {
       const blipObj = new Blip(
         blip.name,
         ringMap[ring],
@@ -113,7 +129,10 @@ const plotRadarGraph = function (title, blips, currentRadarName, alternativeRada
         blip.topic,
         blip.description,
       )
-      quadrants[currentQuadrant].add(blipObj)
+
+      currentQuadrants.forEach((currentQuadrant) => {
+        quadrants[currentQuadrant].add(blipObj)
+      })
     }
   })
 
