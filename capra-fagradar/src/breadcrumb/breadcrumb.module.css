@@ -1,0 +1,17 @@
+.breadcrumb {
+	list-style-type: none;
+	margin: 0 0 1rem 0;
+	padding: 0;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.breadcrumb > * + *::before {
+	content:"\A";
+	width:0.5rem;
+	height:0.5rem;
+	border-radius:50%;
+	background: black;
+	display:inline-block;
+	margin:0 0.4rem;
+}
