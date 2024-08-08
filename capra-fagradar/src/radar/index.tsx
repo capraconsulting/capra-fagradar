@@ -8,25 +8,48 @@ interface Blip {
   new: boolean;
 }
 
-interface RadarChartProps {
-  blips: Blip[];
-  quadrant: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-  depth: number,
+type Color = string; // TODO: is there an html color / css color type?
+
+type QuadrantType = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+
+type BlipProps = {
+  blip: Blip;
+  color?: Color;
 }
 
-const RadarChart: React.FC<RadarChartProps> = ({ blips, quadrant, depth }) => {
-  const getTransform = () => {
-    switch (quadrant) {
+const Blip: React.FC<BlipProps> = ({ blip, color }) => {
+  const fill_and_stroke_color = color || "#69b3a2";
+  return (
+    <g transform={`translate(${blip.x}, ${blip.y})`}>
+      <circle cx="0" cy="0" r="10" fill={fill_and_stroke_color} />
+      {blip.new && <circle cx="0" cy="0" r="13" fill="none" stroke={fill_and_stroke_color} strokeWidth="2" />}
+      <text x="-5" y="4" fontSize="10" fill="#fff">{blip.id}</text>
+    </g>
+  );
+}
+
+interface RadarChartProps {
+  name: string,
+  blipColor?: Color;
+  blips: Blip[];
+  orientation: QuadrantType,
+  depth: number,
+  size: number,
+}
+
+const Quadrant: React.FC<RadarChartProps> = ({ blipColor, blips, orientation, depth, size }) => {
+  const getTransform = (orientation: QuadrantType, x: number, y: number) => {
+    switch (orientation) {
       case 'top-left':
-        return 'rotate(0)';
+        return `rotate(-90, ${x}, ${y}) translate(0, 240)`;
       case 'top-right':
-        return 'rotate(90)';
+        return `rotate(0, ${x}, ${y})`;
       case 'bottom-left':
-        return 'rotate(-90)';
+        return `rotate(180, ${x}, ${y}) translate(-240, 240)`;
       case 'bottom-right':
-        return 'rotate(180)';
+        return `rotate(90, ${x}, ${y}) translate(-240, 0)`;
       default:
-        return 'rotate(0)';
+        return `rotate(0, ${x}, ${y})`;
     }
   };
 
@@ -35,7 +58,9 @@ const RadarChart: React.FC<RadarChartProps> = ({ blips, quadrant, depth }) => {
   const arcTo = (rx: number, ry: number, xAxisRotation: number, largeArcFlag: number, sweepFlag: number, x: number, y: number) =>
     `A ${rx},${ry} ${xAxisRotation} ${largeArcFlag},${sweepFlag} ${x},${y}`;
 
-  const drawArc = (centerX: number, centerY: number, outerRadius: number) => {
+  const drawArc = (orientation: QuadrantType, outerRadius: number) => {
+    const centerX = 0;
+    const centerY = size;
     return `
       ${moveTo(centerX, centerY)}
       ${lineTo(centerX, centerY - outerRadius)}
@@ -44,61 +69,63 @@ const RadarChart: React.FC<RadarChartProps> = ({ blips, quadrant, depth }) => {
     `;
   };
 
-	const size = 240;
-	const x = 0;
-  const y = size;
-
   return (
       <svg
         viewBox={`0 0 ${size} ${size}`}
-        width={size * 2} height={size * 2} style={{ border: '1px solid blue' }}>
-       <g transform={getTransform()}>
-          <path d={drawArc(x, y, size)} fill="#afafaf" />
-          {Array(depth).fill(1).map((_itm, i) => (
-            <path d={drawArc(x, y, size * i / depth)} fill="none" stroke="#ccc" />
+        width={size * 2} height={size * 2}
+        >
+       <g transform={getTransform(orientation, 0, size)}>
+          <path d={drawArc(orientation, size)} fill="#afafaf" />
+          {Array(depth+1).fill(1).map((_itm, i) => (
+            <path key={`outline-${i}`} d={drawArc(orientation, size * i / depth)} fill="none" stroke="#ccc" />
           ))}
         </g>
         {blips.map(blip => (
-          <g key={blip.id} transform={`translate(${blip.x}, ${blip.y})`}>
-            <circle cx="0" cy="0" r="10" fill="#69b3a2" />
-            {blip.new && <circle cx="0" cy="0" r="13" fill="none" stroke="#69b3a2" strokeWidth="2" />}
-            <text x="-5" y="4" fontSize="10" fill="#fff">{blip.id}</text>
-          </g>
+          <Blip key={blip.id} blip={blip} color={blipColor} />
         ))}
       </svg>
   );
 };
 
+type Quadrant = {
+  name: string;
+  orientation: QuadrantType;
+  blipColor: Color;
+  blips: Blip[];
+}
+
 type Props = {
 	/*
 	 *  List of 4 quadrants
 	 */
-	quadrant: [string, string, string, string];
+	quadrant: [Quadrant, Quadrant, Quadrant, Quadrant];
 };
 
 export const Radar: React.FC<Props> = ({ quadrants }) => {
-  const blips = [
-    { id: 18, x: 60, y: 110, new: true },
-    { id: 19, x: 160, y: 50, new: true },
-    { id: 20, x: 40, y: 160, new: true },
-    { id: 21, x: 120, y: 220, new: false },
-    { id: 22, x: 200, y: 80, new: false },
-    { id: 23, x: 100, y: 190, new: false },
-    { id: 24, x: 60, y: 240, new: false },
-  ];
+  const depth = 4;
+  const size = 240;
 
 	return <>
     <div>
       <select>
         <option value="">Alle kvadranter</option>
-        {(quadrants || []).map((quadrant) => (
-          <option value="">{quadrant}</option>
+        {(quadrants || []).map(({ name }) => (
+          <option key={`option-${name}`} value="">{name}</option>
         ))}
       </select>
 
       <input placeholder="søk i radar" />
     </div>
 
-    <RadarChart blips={blips} quadrant="top-left" depth={4} />
+    <div className={styles.quadrants} style={{ maxWidth: `${size}px` }}>
+    { (quadrants || []).map(quadrant => (
+      <Quadrant
+        key={`${quadrant.name}-${quadrant.orientation}`}
+        depth={depth}
+        size={size}
+        {...quadrant}
+        />
+    )) }
+    </div>
 	</>
 };

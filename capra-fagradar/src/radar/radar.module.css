@@ -1,0 +1,7 @@
+.quadrants {
+  display: grid;
+  grid-template:
+    "a a" auto
+    "a a" auto;
+  gap: 0;
+}

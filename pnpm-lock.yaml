@@ -10,6 +10,9 @@ importers:
 
   capra-fagradar:
     dependencies:
+      '@fontsource-variable/inter':
+        specifier: ^5.0.20
+        version: 5.0.20
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -175,6 +178,9 @@ packages:
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource-variable/inter@5.0.20':
+    resolution: {integrity: sha512-dhzG4Zls/tIrf8h0FhTNi8jT/uFwNhdTY2vKe6DYqoXDYOfEcTVZDyh1hKml1rlLT44Y7OoKoGz8w7czDW7twQ==}
 
   '@remix-run/router@1.19.0':
     resolution: {integrity: sha512-zDICCLKEwbVYTS6TjYaWtHXxkdoUvD/QXvyVZjGCsWz5vyH7aFeONlPffPdW+Y/t6KT0MgXb2Mfjun9YpWN1dA==}
@@ -521,6 +527,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.21.5':
     optional: true
+
+  '@fontsource-variable/inter@5.0.20': {}
 
   '@remix-run/router@1.19.0': {}
 

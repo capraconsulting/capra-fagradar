@@ -19,6 +19,17 @@ const Header = () => {
 	);
 };
 
+const Footer = () => {
+  return (
+    <footer className={style.footer}>
+				<Logo />
+        <div>
+          <a href="https://capraconsulting.no">Tilbake til capraconsulting.no</a>
+        </div>
+    </footer>
+  );
+}
+
 export const App = () => {
 	return (
 		<div>
@@ -27,6 +38,7 @@ export const App = () => {
 				<Breadcrumb />
 				<Outlet />
 			</main>
+      <Footer />
 		</div>
 	);
 };
@@ -51,11 +63,64 @@ export const MainPage = () => {
 
 export const TechnicalRadar = () => {
 	const quadrants = [
-		"backend",
-		"frontend",
-		"software engineering",
-		"plattform",
+    {
+      name: "backend",
+      orientation: "top-left",
+      blipColor: "rgb(71, 161, 173)",
+      blips: [
+        { id: 18, x: 60, y: 110, new: true },
+        { id: 19, x: 160, y: 50, new: true },
+        { id: 20, x: 40, y: 160, new: true },
+        { id: 21, x: 120, y: 220, new: false },
+        { id: 22, x: 200, y: 80, new: false },
+        { id: 23, x: 100, y: 190, new: false },
+        { id: 24, x: 60, y: 240, new: false },
+      ],
+    },
+    {
+      name: "frontend",
+      orientation: "top-right",
+      blipColor: "rgb(107, 158, 120)",
+      blips: [
+        { id: 18, x: 60, y: 110, new: true },
+        { id: 19, x: 160, y: 50, new: true },
+        { id: 20, x: 40, y: 160, new: true },
+        { id: 21, x: 120, y: 220, new: false },
+        { id: 22, x: 200, y: 80, new: false },
+        { id: 23, x: 100, y: 190, new: false },
+        { id: 24, x: 60, y: 240, new: false },
+      ],
+    },
+    {
+      name: "software engineering",
+      orientation: "bottom-left",
+      blipColor: "rgb(204, 133, 10)",
+      blips: [
+        { id: 18, x: 60, y: 110, new: true },
+        { id: 19, x: 160, y: 50, new: true },
+        { id: 20, x: 40, y: 160, new: true },
+        { id: 21, x: 120, y: 220, new: false },
+        { id: 22, x: 200, y: 80, new: false },
+        { id: 23, x: 100, y: 190, new: false },
+        { id: 24, x: 60, y: 240, new: false },
+      ],
+    },
+    {
+      name: "plattform",
+      orientation: "bottom-right",
+      blipColor: "rgb(225, 106, 124)",
+      blips: [
+        { id: 18, x: 60, y: 110, new: true },
+        { id: 19, x: 160, y: 50, new: true },
+        { id: 20, x: 40, y: 160, new: true },
+        { id: 21, x: 120, y: 220, new: false },
+        { id: 22, x: 200, y: 80, new: false },
+        { id: 23, x: 100, y: 190, new: false },
+        { id: 24, x: 60, y: 240, new: false },
+      ],
+    },
 	];
+
 	return (
 		<div>
 			<h1> Teknisk radar </h1>
@@ -65,7 +130,65 @@ export const TechnicalRadar = () => {
 };
 
 export const TechLeaderRadar = () => {
-	const quadrants = ["smidig", "organisasjon", "ledelse", "teknisk"];
+	const quadrants = [
+    {
+      name: "smidig",
+      orientation: "top-left",
+      blipColor: "rgb(71, 161, 173)",
+      blips: [
+        { id: 18, x: 60, y: 110, new: true },
+        { id: 19, x: 160, y: 50, new: true },
+        { id: 20, x: 40, y: 160, new: true },
+        { id: 21, x: 120, y: 220, new: false },
+        { id: 22, x: 200, y: 80, new: false },
+        { id: 23, x: 100, y: 190, new: false },
+        { id: 24, x: 60, y: 240, new: false },
+      ],
+    },
+    {
+      name: "organisasjon",
+      orientation: "top-right",
+      blipColor: "rgb(107, 158, 120)",
+      blips: [
+        { id: 18, x: 60, y: 110, new: true },
+        { id: 19, x: 160, y: 50, new: true },
+        { id: 20, x: 40, y: 160, new: true },
+        { id: 21, x: 120, y: 220, new: false },
+        { id: 22, x: 200, y: 80, new: false },
+        { id: 23, x: 100, y: 190, new: false },
+        { id: 24, x: 60, y: 240, new: false },
+      ],
+    },
+    {
+      name: "ledelse",
+      orientation: "bottom-left",
+      blipColor: "rgb(204, 133, 10)",
+      blips: [
+        { id: 18, x: 60, y: 110, new: true },
+        { id: 19, x: 160, y: 50, new: true },
+        { id: 20, x: 40, y: 160, new: true },
+        { id: 21, x: 120, y: 220, new: false },
+        { id: 22, x: 200, y: 80, new: false },
+        { id: 23, x: 100, y: 190, new: false },
+        { id: 24, x: 60, y: 240, new: false },
+      ],
+    },
+    {
+      name: "teknisk",
+      orientation: "bottom-right",
+      blipColor: "rgb(225, 106, 124)",
+      blips: [
+        { id: 18, x: 60, y: 110, new: true },
+        { id: 19, x: 160, y: 50, new: true },
+        { id: 20, x: 40, y: 160, new: true },
+        { id: 21, x: 120, y: 220, new: false },
+        { id: 22, x: 200, y: 80, new: false },
+        { id: 23, x: 100, y: 190, new: false },
+        { id: 24, x: 60, y: 240, new: false },
+      ],
+    }
+  ];
+
 	return (
 		<div>
 			<h1>Teknologiledelse radar</h1>
