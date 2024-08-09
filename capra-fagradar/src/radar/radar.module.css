@@ -5,3 +5,40 @@
     "a a" auto;
   gap: 0;
 }
+
+.quadrant {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 480px;
+  height: 480px;
+}
+
+.blip {
+  position: absolute;
+}
+
+.blip > div {
+  position: relative;
+  background: grey;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.circleOutline > div::after {
+  position: absolute;
+  content: '';
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: inherit;
+}
