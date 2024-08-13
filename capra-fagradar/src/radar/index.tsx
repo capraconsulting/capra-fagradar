@@ -6,8 +6,9 @@ import { Tooltip } from "react-tooltip";
 
 interface Blip {
 	id: number;
+  name: string;
 	depth: number;
-	new: boolean;
+	is_new: boolean;
 }
 
 type Color = string; // TODO: is there an html color / css color type?
@@ -20,14 +21,15 @@ type BlipProps = {
 };
 
 const Blip: React.FC<BlipProps> = ({ blip, color }) => {
-	const className = styles.blip + (blip.new ? ` ${styles.circleOutline}` : "");
+	const className = styles.blip + (blip.is_new ? ` ${styles.circleOutline}` : "");
+  console.log(blip);
 
 	return (
 		<div className={className} style={{ left: blip.x, top: blip.y }}>
 			<div
 				style={{ background: color, borderColor: color }}
 				data-tooltip-id="my-tooltip"
-				data-tooltip-content="Hello world!"
+				data-tooltip-content={blip.name}
 				data-tooltip-place="top"
 			>
 				{blip.id}

@@ -1,5 +1,7 @@
 import { createBrowserRouter, useRouteError, Link } from "react-router-dom";
-import { App, MainPage, TechnicalRadar, TechLeaderRadar } from "./app.tsx";
+import { App, MainPage } from "./app.tsx";
+import { TechnicalRadar } from './technical-radar';
+import { TechLeaderRadar } from './tech-leader-radar';
 
 const ErrorPage = () => {
 	const error = useRouteError();

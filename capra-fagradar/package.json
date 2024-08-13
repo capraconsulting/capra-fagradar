@@ -18,9 +18,13 @@
 		"react-tooltip": "^5.28.0"
 	},
 	"devDependencies": {
+		"@mdx-js/rollup": "^3.0.1",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react-swc": "^3.5.0",
+		"remark-frontmatter": "^5.0.0",
+		"remark-gfm": "^4.0.0",
+		"remark-mdx-frontmatter": "^5.0.0",
 		"typescript": "^5.2.2",
 		"vite": "^5.3.4"
 	},
