@@ -10,7 +10,7 @@ for (const modulePath in modules) {
 
   items.push({
     ...frontmatter,
-		element: createElement(modules[modulePath]?.default),
+		//element: createElement(modules[modulePath]?.default),
   });
 };
 
