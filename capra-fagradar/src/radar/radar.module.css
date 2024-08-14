@@ -1,3 +1,15 @@
+.rightAnchoredShelf {
+  position: fixed;
+  width: 45vw;
+  top: 10rem;
+  right: 0;
+  background: white;
+  border: 0.2rem solid #121C31;
+  border-right: 0;
+  padding: 2rem;
+  border-radius: 1rem 0 0 1rem;
+}
+
 .quadrants {
   display: grid;
   grid-template:

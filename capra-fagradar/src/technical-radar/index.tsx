@@ -7,10 +7,12 @@ let items = [];
 
 for (const modulePath in modules) {
   const frontmatter =  modules[modulePath]?.frontmatter;
+  const defaultExport = modules[modulePath]?.default;
+  const Empty = () => { return <div>Empty</div> };
 
   items.push({
     ...frontmatter,
-		//element: createElement(modules[modulePath]?.default),
+		element: createElement(defaultExport || Empty),
   });
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { scaleLinear } from "d3-scale";
 import styles from "./radar.module.css";
 import "react-tooltip/dist/react-tooltip.css";
@@ -18,11 +18,11 @@ type QuadrantType = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 type BlipProps = {
 	blip: Blip;
 	color?: Color;
+  onClick: Function;
 };
 
-const Blip: React.FC<BlipProps> = ({ blip, color }) => {
+const Blip: React.FC<BlipProps> = ({ blip, color, onClick }) => {
 	const className = styles.blip + (blip.is_new ? ` ${styles.circleOutline}` : "");
-  console.log(blip);
 
 	return (
 		<div className={className} style={{ left: blip.x, top: blip.y }}>
@@ -31,6 +31,7 @@ const Blip: React.FC<BlipProps> = ({ blip, color }) => {
 				data-tooltip-id="my-tooltip"
 				data-tooltip-content={blip.name}
 				data-tooltip-place="top"
+        onClick={(e) => onClick(e, blip)}
 			>
 				{blip.id}
 			</div>
@@ -42,6 +43,7 @@ interface RadarChartProps {
 	name: string;
 	blipColor?: Color;
 	blips: Blip[];
+  blipOnClick: Function;
 	orientation: QuadrantType;
 	maxDepth: number;
 	size: number;
@@ -50,6 +52,7 @@ interface RadarChartProps {
 const Quadrant: React.FC<RadarChartProps> = ({
 	blipColor,
 	blips,
+  blipOnClick,
 	orientation,
 	maxDepth,
 	size,
@@ -182,7 +185,7 @@ const Quadrant: React.FC<RadarChartProps> = ({
 				</g>
 			</svg>
 			{(flattenedArrayBlips || []).map((blip) => (
-				<Blip key={blip.id} blip={blip} color={blipColor} />
+				<Blip key={blip.id} blip={blip} color={blipColor} onClick={blipOnClick} />
 			))}
 			<Tooltip id="my-tooltip" />
 		</div>
@@ -196,6 +199,24 @@ type Quadrant = {
 	blips: Blip[];
 };
 
+const RightAnchoredShelf: React.FC = ({ children }) => {
+  return (
+    <div className={styles.rightAnchoredShelf}>
+    {children}
+    </div>
+  );
+}
+
+const BlipInfo: React.FC<{ blip: Blip, onClose: Function }> = ({ blip, onClose }) => {
+  return (
+    <RightAnchoredShelf>
+      <h1>{blip.name}</h1>
+      <div>{blip.element}</div>
+      <button onClick={onClose}>Close</button>
+    </RightAnchoredShelf>
+  );
+}
+
 type Props = {
 	/*
 	 *  List of 4 quadrants
@@ -204,8 +225,14 @@ type Props = {
 };
 
 export const Radar: React.FC<Props> = ({ quadrants }) => {
+  const [currentBlip, setCurrentBlip] = useState();
+
 	const maxDepth = 4;
 	const size = 480;
+
+  const blipOnClick = (e, blip) => {
+    setCurrentBlip(blip);
+  }
 
 	return (
 		<>
@@ -228,10 +255,15 @@ export const Radar: React.FC<Props> = ({ quadrants }) => {
 						key={`${quadrant.name}-${quadrant.orientation}`}
 						maxDepth={maxDepth}
 						size={size}
+            blipOnClick={blipOnClick}
 						{...quadrant}
 					/>
 				))}
 			</div>
+
+      { currentBlip && (
+        <BlipInfo blip={currentBlip} onClose={() => setCurrentBlip()} />
+      )}
 		</>
 	);
 };
