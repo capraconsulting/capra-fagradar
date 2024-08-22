@@ -110,7 +110,7 @@ const Quadrant: React.FC<RadarChartProps> = ({
 		 */
 		const degreeToRadians = (degrees: number) => (degrees / 360) * 2 * Math.PI;
 
-		const angleMargin = degreeToRadians(5);
+		const angleMargin = degreeToRadians(20 / depth);
 		const angleScale = scaleLinear()
 			.domain([0, blips.length - 1])
 			.range([0 + angleMargin, Math.PI / 2 - angleMargin]);
