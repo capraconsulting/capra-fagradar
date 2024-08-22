@@ -50,6 +50,7 @@ interface RadarChartProps {
 }
 
 const Quadrant: React.FC<RadarChartProps> = ({
+  name,
 	blipColor,
 	blips,
   blipOnClick,
@@ -109,10 +110,10 @@ const Quadrant: React.FC<RadarChartProps> = ({
 		 */
 		const degreeToRadians = (degrees: number) => (degrees / 360) * 2 * Math.PI;
 
-		const margin = degreeToRadians(5);
+		const angleMargin = degreeToRadians(5);
 		const angleScale = scaleLinear()
 			.domain([0, blips.length - 1])
-			.range([0 + margin, Math.PI / 2 - margin]);
+			.range([0 + angleMargin, Math.PI / 2 - angleMargin]);
 
 		return blips.map((blip, index) => {
 			const angle = angleScale(index);
@@ -188,6 +189,7 @@ const Quadrant: React.FC<RadarChartProps> = ({
 				<Blip key={blip.id} blip={blip} color={blipColor} onClick={blipOnClick} />
 			))}
 			<Tooltip id="my-tooltip" />
+      <span className={`${styles.quadrantTitle} ${styles[orientation]}`}>{name}</span>
 		</div>
 	);
 };
