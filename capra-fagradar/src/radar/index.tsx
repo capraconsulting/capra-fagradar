@@ -4,9 +4,10 @@ import styles from "./radar.module.css";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 
-interface Blip {
+export interface Blip {
 	id: number;
-  name: string;
+  	name: string;
+	logo?: string
 	depth: number;
 	is_new: boolean;
 }
@@ -21,19 +22,19 @@ type BlipProps = {
   onClick: Function;
 };
 
-const Blip: React.FC<BlipProps> = ({ blip, color, onClick }) => {
+const RadarBlip: React.FC<BlipProps> = ({ blip, color, onClick }) => {
 	const className = styles.blip + (blip.is_new ? ` ${styles.circleOutline}` : "");
 
 	return (
 		<div className={className} style={{ left: blip.x, top: blip.y }}>
 			<div
-				style={{ background: color, borderColor: color }}
+				style={{ background: color, borderColor: color, width: '30px', height: '30px', display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
 				data-tooltip-id="my-tooltip"
 				data-tooltip-content={blip.name}
 				data-tooltip-place="top"
         onClick={(e) => onClick(e, blip)}
 			>
-				{blip.id}
+				<img src={blip.logo} style={{maxWidth: '75%', maxHeight: '75%', width: 'auto', height: 'auto' }}></img>
 			</div>
 		</div>
 	);
@@ -186,7 +187,7 @@ const Quadrant: React.FC<RadarChartProps> = ({
 				</g>
 			</svg>
 			{(flattenedArrayBlips || []).map((blip) => (
-				<Blip key={blip.id} blip={blip} color={blipColor} onClick={blipOnClick} />
+				<RadarBlip key={blip.id} blip={blip} color={blipColor} onClick={blipOnClick} />
 			))}
 			<Tooltip id="my-tooltip" />
       <span className={`${styles.quadrantTitle} ${styles[orientation]}`}>{name}</span>
@@ -223,7 +224,7 @@ type Props = {
 	/*
 	 *  List of 4 quadrants
 	 */
-	quadrant: [Quadrant, Quadrant, Quadrant, Quadrant];
+	quadrants: [Quadrant, Quadrant, Quadrant, Quadrant];
 };
 
 export const Radar: React.FC<Props> = ({ quadrants }) => {
