@@ -8,6 +8,7 @@
   border-right: 0;
   padding: 2rem;
   border-radius: 1rem 0 0 1rem;
+  z-index: 100;
 }
 
 .quadrants {
