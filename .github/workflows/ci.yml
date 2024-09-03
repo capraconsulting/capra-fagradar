@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: 'Tests'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checking Out Code'
+        uses: actions/checkout@v4
+
+      - name: 'Installing Dependencies'
+        uses: ./.github/actions/install
+
+      - name: 'Running Unit Tests'
+        run: pnpm --filter "capra-fagradar" test
+
+  build:
+    name: 'Builds'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checking Out Code'
+        uses: actions/checkout@v4
+
+      - name: 'Installing Dependencies'
+        uses: ./.github/actions/install
+
+      - name: 'Building'
+        run: pnpm --filter "capra-fagradar" build

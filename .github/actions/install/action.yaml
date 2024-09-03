@@ -1,0 +1,16 @@
+name: 'pnpm install'
+description: 'Doing installs'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Setting up Node'
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.node-version'
+
+    # Should pick pnpm verison based on `.packageManager` in package.json
+    - uses: pnpm/action-setup@v4
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
