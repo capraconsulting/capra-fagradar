@@ -1,11 +1,10 @@
 import { createElement } from 'react';
-import { Radar, type Blip } from '../radar';
-
+import { Radar, type Blip, type Quadrant } from '../radar';
 
 // Dynamically import all mdx files in current dir
 const modules = import.meta.glob('./**/*.mdx', { eager: true }) as any;
 const logos = import.meta.glob('./**/*.png', { eager: true }) as Record<string, { default: string }>;
-const blips: Blip[] = [];
+const blips: (Blip & any)[] = [];
 
 
 for (const modulePath in modules) {
@@ -55,7 +54,7 @@ export const TechnicalRadar = () => {
         ...(blips.filter(item => item.quadrant === 'plattform')),
 			],
 		},
-	];
+	] satisfies [Quadrant, Quadrant, Quadrant, Quadrant]  ;
 
 	return (
 		<div>

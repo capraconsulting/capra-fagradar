@@ -6,10 +6,13 @@ import { Tooltip } from "react-tooltip";
 
 export interface Blip {
 	id: number;
-  	name: string;
+  name: string;
 	logo?: string
 	depth: number;
 	is_new: boolean;
+  element: React.ReactElement;
+  x: number;
+  y: number;
 }
 
 type Color = string; // TODO: is there an html color / css color type?
@@ -88,7 +91,7 @@ const Quadrant: React.FC<RadarChartProps> = ({
 		y: number,
 	) => `A ${rx},${ry} ${xAxisRotation} ${largeArcFlag},${sweepFlag} ${x},${y}`;
 
-	const drawArc = (orientation: QuadrantType, outerRadius: number) => {
+	const drawArc = (_orientation: QuadrantType, outerRadius: number) => {
 		const centerX = 0;
 		const centerY = size;
 		return `
@@ -152,21 +155,25 @@ const Quadrant: React.FC<RadarChartProps> = ({
 		});
 	};
 
-	const groupedBlips = Object.groupBy(blips, ({ depth }) => depth);
+	const groupedBlips = Object.groupBy(
+    blips,
+    ({ depth } : { depth : number }) => depth
+  );
 
-	const distributedBlips = Object.keys(groupedBlips).map((depth) => {
+	const distributedBlips = Object.keys(groupedBlips).map((depth : string) => {
 		return distributeBlips(
-			groupedBlips[depth],
-			depth,
+			groupedBlips[Number(depth)] as any,
+			Number(depth),
 			size,
 			orientation,
 			maxDepth,
 		);
 	});
 
-	const flattenedArrayBlips = Object.keys(distributedBlips).flatMap(
-		(depth) => distributedBlips[depth],
-	);
+	const flattenedArrayBlips = Object.keys(distributedBlips)
+    .flatMap(
+      (depth : string) => distributedBlips[Number(depth)],
+    );
 
 	return (
 		<div className={styles.quadrant}>
@@ -195,14 +202,14 @@ const Quadrant: React.FC<RadarChartProps> = ({
 	);
 };
 
-type Quadrant = {
+export type Quadrant = {
 	name: string;
 	orientation: QuadrantType;
 	blipColor: Color;
 	blips: Blip[];
 };
 
-const RightAnchoredShelf: React.FC = ({ children }) => {
+const RightAnchoredShelf: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <div className={styles.rightAnchoredShelf}>
     {children}
@@ -210,7 +217,7 @@ const RightAnchoredShelf: React.FC = ({ children }) => {
   );
 }
 
-const BlipInfo: React.FC<{ blip: Blip, onClose: Function }> = ({ blip, onClose }) => {
+const BlipInfo: React.FC<{ blip: Blip, onClose: React.MouseEventHandler<HTMLButtonElement> }> = ({ blip, onClose }) => {
   return (
     <RightAnchoredShelf>
       <h1>{blip.name}</h1>
@@ -228,12 +235,12 @@ type Props = {
 };
 
 export const Radar: React.FC<Props> = ({ quadrants }) => {
-  const [currentBlip, setCurrentBlip] = useState();
+  const [currentBlip, setCurrentBlip] = useState<Blip | undefined>();
 
 	const maxDepth = 4;
 	const size = 480;
 
-  const blipOnClick = (e, blip) => {
+  const blipOnClick = (_e : unknown, blip : Blip) => {
     setCurrentBlip(blip);
   }
 
@@ -265,7 +272,7 @@ export const Radar: React.FC<Props> = ({ quadrants }) => {
 			</div>
 
       { currentBlip && (
-        <BlipInfo blip={currentBlip} onClose={() => setCurrentBlip()} />
+        <BlipInfo blip={currentBlip} onClose={() => setCurrentBlip(undefined)} />
       )}
 		</>
 	);

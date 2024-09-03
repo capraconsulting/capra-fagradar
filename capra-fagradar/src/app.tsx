@@ -42,7 +42,7 @@ export const App = () => {
 	);
 };
 
-const HalfWidthSection = ({ children }) => {
+const HalfWidthSection : React.FC<React.PropsWithChildren> = ({ children }) => {
 	return <section className={style.halfWidthSection}>{children}</section>;
 };
 

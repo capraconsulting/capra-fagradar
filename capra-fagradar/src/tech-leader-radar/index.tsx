@@ -1,5 +1,5 @@
-import React, { createElement } from 'react';
-import { Radar } from '../radar';
+import { createElement } from 'react';
+import { Radar, type Quadrant } from '../radar';
 
 // Dynamically import all mdx files in current dir
 const modules = import.meta.glob('./**/*.mdx', { eager: true }) as any;
@@ -50,7 +50,7 @@ export const TechLeaderRadar = () => {
         ...(items.filter(item => item.quadrant === 'teknisk')),
 			],
 		},
-	];
+	] satisfies [Quadrant, Quadrant, Quadrant, Quadrant]  ;
 
 	return (
 		<div>

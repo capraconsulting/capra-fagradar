@@ -4,8 +4,7 @@ import { TechnicalRadar } from './technical-radar';
 import { TechLeaderRadar } from './tech-leader-radar';
 
 const ErrorPage = () => {
-	const error = useRouteError();
-	console.error(error);
+	const error = useRouteError() as { statusText?: string, message?: string };
 
 	return (
 		<div id="error-page">
