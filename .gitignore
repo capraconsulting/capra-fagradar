@@ -189,6 +189,9 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
+### IntelliJ ###
+/.idea/
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
