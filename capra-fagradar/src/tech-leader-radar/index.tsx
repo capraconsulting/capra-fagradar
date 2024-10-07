@@ -19,35 +19,35 @@ for (const modulePath in modules) {
 export const TechLeaderRadar = () => {
 	const quadrants = [
 		{
-			name: "smidig",
+			name: "Folk",
 			orientation: "top-left",
 			blipColor: "rgb(71, 161, 173)",
 			blips: [
-        ...(items.filter(item => item.quadrant === 'smidig')),
+        ...(items.filter(item => item.quadrant === 'Folk')),
 			],
 		},
 		{
-			name: "organisasjon",
+			name: "Organisasjon",
 			orientation: "top-right",
 			blipColor: "rgb(107, 158, 120)",
 			blips: [
-        ...(items.filter(item => item.quadrant === 'organisasjon')),
+        ...(items.filter(item => item.quadrant === 'Organisasjon')),
 			],
 		},
 		{
-			name: "ledelse",
+			name: "Prosess",
 			orientation: "bottom-left",
 			blipColor: "rgb(204, 133, 10)",
 			blips: [
-        ...(items.filter(item => item.quadrant === 'ledelse')),
+        ...(items.filter(item => item.quadrant === 'Prosess')),
       ],
 		},
 		{
-			name: "teknisk",
+			name: "Teknologi",
 			orientation: "bottom-right",
 			blipColor: "rgb(225, 106, 124)",
 			blips: [
-        ...(items.filter(item => item.quadrant === 'teknisk')),
+        ...(items.filter(item => item.quadrant === 'Teknologi')),
 			],
 		},
 	] satisfies [Quadrant, Quadrant, Quadrant, Quadrant]  ;
