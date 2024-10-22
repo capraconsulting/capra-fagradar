@@ -246,20 +246,7 @@ export const Radar: React.FC<Props> = ({ quadrants }) => {
 
 	return (
 		<>
-			<div>
-				<select>
-					<option value="">Alle kvadranter</option>
-					{(quadrants || []).map(({ name }) => (
-						<option key={`option-${name}`} value="">
-							{name}
-						</option>
-					))}
-				</select>
-
-				<input placeholder="søk i radar" />
-			</div>
-
-			<div className={styles.quadrants} style={{ maxWidth: `${size}px` }}>
+      <div className={styles.quadrants} style={{ maxWidth: `${size}px` }}>
 				{(quadrants || []).map((quadrant) => (
 					<Quadrant
 						key={`${quadrant.name}-${quadrant.orientation}`}
