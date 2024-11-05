@@ -227,6 +227,46 @@ const BlipInfo: React.FC<{ blip: Blip, onClose: React.MouseEventHandler<HTMLButt
   );
 }
 
+
+interface QuadrantListProps {
+	name: string;
+	blips: Blip[];
+}
+
+const QuadrantList: React.FC<QuadrantListProps> = ({
+  name,
+	blips,
+}) => {
+	const groupedBlips = Object.groupBy(
+    blips,
+    ({ depth } : { depth : number }) => depth
+  );
+
+  return (
+    <div className={styles.quadrantList}>
+      <h2> {name} </h2>
+      <div>
+      { Object.keys(groupedBlips).map(depth => {
+        const blips = (groupedBlips[Number(depth)] || []) as Blip[];
+
+        return (
+          <div>
+            <h3>{ depth }</h3>
+            <div>
+            { blips.map(blip => (
+              <div>
+              {blip.name}
+              </div>
+             ))}
+            </div>
+          </div>
+        );
+      })}
+      </div>
+    </div>
+  );
+}
+
 type Props = {
 	/*
 	 *  List of 4 quadrants
@@ -246,17 +286,39 @@ export const Radar: React.FC<Props> = ({ quadrants }) => {
 
 	return (
 		<>
-      <div className={styles.quadrants} style={{ maxWidth: `${size}px` }}>
-				{(quadrants || []).map((quadrant) => (
-					<Quadrant
-						key={`${quadrant.name}-${quadrant.orientation}`}
-						maxDepth={maxDepth}
-						size={size}
-            blipOnClick={blipOnClick}
-						{...quadrant}
-					/>
-				))}
-			</div>
+      <div className={styles.quadrants}>
+        <QuadrantList {...(quadrants[0])} />
+        <Quadrant
+          maxDepth={maxDepth}
+          size={size}
+          blipOnClick={blipOnClick}
+          {...(quadrants[0])}
+        />
+
+        <Quadrant
+          maxDepth={maxDepth}
+          size={size}
+          blipOnClick={blipOnClick}
+          {...(quadrants[1])}
+        />
+        <QuadrantList {...(quadrants[1])} />
+
+        <QuadrantList {...(quadrants[2])} />
+        <Quadrant
+          maxDepth={maxDepth}
+          size={size}
+          blipOnClick={blipOnClick}
+          {...(quadrants[2])}
+        />
+
+        <Quadrant
+          maxDepth={maxDepth}
+          size={size}
+          blipOnClick={blipOnClick}
+          {...(quadrants[3])}
+        />
+        <QuadrantList {...(quadrants[3])} />
+      </div>
 
       { currentBlip && (
         <BlipInfo blip={currentBlip} onClose={() => setCurrentBlip(undefined)} />

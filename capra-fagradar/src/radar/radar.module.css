@@ -12,10 +12,9 @@
 }
 
 .quadrants {
+  width: 100%;
   display: grid;
-  grid-template:
-    "a a" auto
-    "a a" auto;
+  grid-template-columns: min-content min-content min-content min-content;
   gap: 0;
 }
 
@@ -85,4 +84,15 @@
   border-width: 3px;
   border-style: solid;
   border-color: inherit;
+}
+
+.quadrantList {
+  font-size: 12px;
+  margin: 0 5rem;
+}
+
+.quadrantList > div {
+  display: flex;
+  gap: 1rem;
+  position: relative;
 }
