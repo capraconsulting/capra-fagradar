@@ -12,6 +12,7 @@ export const Header = () => {
 			<div className={style.links}>
 				<Link to="/technical-radar/">Teknisk radar</Link>
 				<Link to="/tech-leader-radar/">Teknologiledelse radar</Link>
+				<Link to="/om-fagradar/">Om fagradaren</Link>
 			</div>
 		</header>
 	);

@@ -2,6 +2,7 @@ import { createBrowserRouter, useRouteError, Link } from "react-router-dom";
 import { App, MainPage } from "./app.tsx";
 import { TechnicalRadar } from './technical-radar';
 import { TechLeaderRadar } from './tech-leader-radar';
+import OmFagradar from './om-fagradar.mdx';
 
 const ErrorPage = () => {
 	const error = useRouteError() as { statusText?: string, message?: string };
@@ -44,6 +45,14 @@ export const router = createBrowserRouter([
 
 				handle: {
 					crumb: () => <span>Teknologiledelse radar</span>,
+				},
+			},
+			{
+				path: "/om-fagradar/",
+				element: <OmFagradar />,
+
+				handle: {
+					crumb: () => <span>Om fagradaren</span>,
 				},
 			},
 		],
