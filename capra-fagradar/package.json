@@ -7,7 +7,7 @@
 		"dev": "vite",
 		"build": "tsc -b && vite build",
 		"preview": "vite preview",
-    "test": "echo 'no test'",
+		"test": "echo 'no test'",
 		"typecheck": "tsc -b"
 	},
 	"dependencies": {
@@ -20,6 +20,7 @@
 	},
 	"devDependencies": {
 		"@mdx-js/rollup": "^3.0.1",
+		"@types/mdx": "^2.0.13",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@vitejs/plugin-react-swc": "^3.5.0",
