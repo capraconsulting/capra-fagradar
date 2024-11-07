@@ -242,7 +242,7 @@ const RightAnchoredShelf: React.FC<React.PropsWithChildren> = ({ children }) => 
 const BlipInfo: React.FC<{ blip: Blip, onClose: React.MouseEventHandler<HTMLButtonElement> }> = ({ blip, onClose }) => {
   return (
     <RightAnchoredShelf>
-      <h1>{blip.name}</h1>
+      <h2>{blip.name}</h2>
       <div>{blip.element}</div>
       <button onClick={onClose}>Close</button>
     </RightAnchoredShelf>
@@ -268,7 +268,7 @@ const QuadrantList: React.FC<QuadrantListProps> = ({
 
   return (
     <div className={[styles.quadrantList, styles[orientation]].join(" ")}>
-      <h2> {name} </h2>
+      <h3> {name} </h3>
       <div className={styles.quadrantListsDepth}>
       { Object.keys(groupedBlips).map(depth => {
         const blips = (groupedBlips[Number(depth)] || []) as Blip[];

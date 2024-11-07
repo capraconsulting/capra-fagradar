@@ -94,6 +94,11 @@
 .quadrantList {
   font-size: 12px;
 
+  h3 {
+    text-transform: capitalize;
+    margin-bottom: 0;
+  }
+
   &.top-left {
     margin-right: 5rem;
   }
@@ -113,7 +118,7 @@
   .quadrantListsDepth {
     display: grid;
     grid-template-columns: max-content max-content;
-    gap: 1rem;
+    gap: 1rem 2rem;
 
     ul {
       padding-left: 0;

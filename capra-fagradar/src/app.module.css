@@ -55,7 +55,7 @@ body {
 
 main {
   min-height: 100vh;
-  padding: 50px;
+  padding: 2rem 3rem;
 
   h2 {
     font-weight: 500;
