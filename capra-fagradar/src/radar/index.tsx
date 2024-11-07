@@ -215,8 +215,8 @@ const Quadrant: React.FC<RadarChartProps> = ({
         />
       ))}
 			</svg>
-			{(flattenedArrayBlips || []).map((blip) => (
-				<RadarBlip key={blip.id} blip={blip} color={blipColor} onClick={blipOnClick} />
+			{(flattenedArrayBlips || []).map((blip, i) => (
+				<RadarBlip key={`blip-${i}`} blip={blip} color={blipColor} onClick={blipOnClick} />
 			))}
 			<Tooltip id="my-tooltip" />
       <span className={`${styles.quadrantTitle} ${styles[orientation]}`}>{name}</span>
@@ -274,11 +274,11 @@ const QuadrantList: React.FC<QuadrantListProps> = ({
         const blips = (groupedBlips[Number(depth)] || []) as Blip[];
 
         return (
-          <div>
+          <div key={`quadrantList-${name}-${depth}`}>
             <h3>{ depth }</h3>
             <ul>
-            { blips.map(blip => (
-              <li>
+            { blips.map((blip, i) => (
+              <li key={`quadrantList-${name}-${depth}-${i}`}>
               {blip.name}
               </li>
              ))}
