@@ -16,6 +16,11 @@
   display: grid;
   grid-template-columns: min-content min-content min-content min-content;
   gap: 0;
+
+  & > *:nth-child(2),
+  & > *:nth-child(3) {
+    align-self: end;
+  }
 }
 
 .quadrant {
@@ -88,11 +93,30 @@
 
 .quadrantList {
   font-size: 12px;
-  margin: 0 5rem;
-}
 
-.quadrantList > div {
-  display: flex;
-  gap: 1rem;
-  position: relative;
+  &.top-left {
+    margin-right: 5rem;
+  }
+
+  &.top-right {
+    margin-left: 5rem;
+  }
+
+  &.bottom-left {
+    margin-right: 5rem;
+  }
+
+  &.bottom-right {
+    margin-left: 5rem;
+  }
+
+  .quadrantListsDepth {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    gap: 1rem;
+
+    ul {
+      padding-left: 0;
+    }
+  }
 }

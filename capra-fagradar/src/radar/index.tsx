@@ -230,11 +230,13 @@ const BlipInfo: React.FC<{ blip: Blip, onClose: React.MouseEventHandler<HTMLButt
 
 interface QuadrantListProps {
 	name: string;
+	orientation: QuadrantType;
 	blips: Blip[];
 }
 
 const QuadrantList: React.FC<QuadrantListProps> = ({
   name,
+  orientation,
 	blips,
 }) => {
 	const groupedBlips = Object.groupBy(
@@ -243,22 +245,22 @@ const QuadrantList: React.FC<QuadrantListProps> = ({
   );
 
   return (
-    <div className={styles.quadrantList}>
+    <div className={[styles.quadrantList, styles[orientation]].join(" ")}>
       <h2> {name} </h2>
-      <div>
+      <div className={styles.quadrantListsDepth}>
       { Object.keys(groupedBlips).map(depth => {
         const blips = (groupedBlips[Number(depth)] || []) as Blip[];
 
         return (
           <div>
             <h3>{ depth }</h3>
-            <div>
+            <ul>
             { blips.map(blip => (
-              <div>
+              <li>
               {blip.name}
-              </div>
+              </li>
              ))}
-            </div>
+            </ul>
           </div>
         );
       })}
