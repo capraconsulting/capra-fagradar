@@ -43,27 +43,13 @@ const RadarBlip: React.FC<BlipProps> = ({ blip, color, onClick }) => {
 	);
 };
 
-interface RadarChartProps {
-	name: string;
-	blipColor?: Color;
-	blips: Blip[];
-  blipOnClick: Function;
-	orientation: QuadrantType;
-	maxDepth: number;
+type ArcProps = {
+  orientation: QuadrantType;
+  outerRadius: number;
 	size: number;
-}
+};
 
-const Quadrant: React.FC<RadarChartProps> = ({
-  name,
-	blipColor,
-	blips,
-  blipOnClick,
-	orientation,
-	maxDepth,
-	size,
-}) => {
-	const margin = 4 /* px */;
-
+const Arc : React.FC<ArcProps> = ({ orientation, outerRadius, size }) => {
 	const getTransform = (orientation: QuadrantType, x: number, y: number) => {
 		switch (orientation) {
 			case "top-left":
@@ -101,6 +87,39 @@ const Quadrant: React.FC<RadarChartProps> = ({
       Z
     `;
 	};
+
+  return (
+    <g transform={getTransform(orientation, 0, size)}>
+      <path
+        d={drawArc(orientation, outerRadius)}
+        fill="white"
+        stroke="#72777D"
+        strokeWidth={1}
+        />
+    </g>
+  )
+}
+
+interface RadarChartProps {
+	name: string;
+	blipColor?: Color;
+	blips: Blip[];
+  blipOnClick: Function;
+	orientation: QuadrantType;
+	maxDepth: number;
+	size: number;
+}
+
+const Quadrant: React.FC<RadarChartProps> = ({
+  name,
+	blipColor,
+	blips,
+  blipOnClick,
+	orientation,
+	maxDepth,
+	size,
+}) => {
+	const margin = 4 /* px */;
 
 	const distributeBlips = (
 		blips: Blip[],
@@ -175,23 +194,26 @@ const Quadrant: React.FC<RadarChartProps> = ({
       (depth : string) => distributedBlips[Number(depth)],
     );
 
+  const quadrantSize = size - margin;
+
+  let arcs = Array(maxDepth + 1)
+    .fill(1)
+    .map((_itm, i) => i);
+
+  // Draw the biggest arc first to have correct ordering (smaler arcs on top)
+  arcs.reverse();
+
 	return (
 		<div className={styles.quadrant}>
 			<svg viewBox={`0 0 ${size} ${size}`} width={size} height={size}>
-				<g transform={getTransform(orientation, 0, size)}>
-					<path d={drawArc(orientation, size - margin)} fill="white" />
-					{Array(maxDepth + 1)
-						.fill(1)
-						.map((_itm, i) => (
-							<path
-								key={`outline-${i}`}
-								d={drawArc(orientation, ((size - margin) * i) / maxDepth)}
-								fill="none"
-								stroke="#72777D"
-								strokeWidth={1}
-							/>
-						))}
-				</g>
+      {arcs.map((i) => (
+        <Arc
+          key={`outline-${i}`}
+          orientation={orientation}
+          outerRadius={quadrantSize * i / maxDepth}
+          size={size}
+        />
+      ))}
 			</svg>
 			{(flattenedArrayBlips || []).map((blip) => (
 				<RadarBlip key={blip.id} blip={blip} color={blipColor} onClick={blipOnClick} />
