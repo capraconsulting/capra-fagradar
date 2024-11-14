@@ -123,6 +123,11 @@
     ul {
       padding-left: 0;
     }
+
+    li:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 }
 

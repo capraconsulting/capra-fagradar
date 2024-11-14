@@ -271,12 +271,14 @@ interface QuadrantListProps {
 	name: string;
 	orientation: QuadrantType;
 	blips: Blip[];
+  blipOnClick: Function;
 }
 
 const QuadrantList: React.FC<QuadrantListProps> = ({
   name,
   orientation,
 	blips,
+  blipOnClick,
 }) => {
 	const groupedBlips = Object.groupBy(
     blips,
@@ -295,7 +297,10 @@ const QuadrantList: React.FC<QuadrantListProps> = ({
             <h3>{ depth }</h3>
             <ul>
             { blips.map((blip, i) => (
-              <li key={`quadrantList-${name}-${depth}-${i}`}>
+              <li
+                key={`quadrantList-${name}-${depth}-${i}`}
+                onClick={(e) => blipOnClick(e, blip)}
+                >
               {blip.name}
               </li>
              ))}
@@ -328,7 +333,10 @@ export const Radar: React.FC<Props> = ({ quadrants }) => {
 	return (
 		<>
       <div className={styles.quadrants}>
-        <QuadrantList {...(quadrants[0])} />
+        <QuadrantList
+          {...(quadrants[0])}
+          blipOnClick={blipOnClick}
+          />
         <Quadrant
           maxDepth={maxDepth}
           size={size}
@@ -342,9 +350,15 @@ export const Radar: React.FC<Props> = ({ quadrants }) => {
           blipOnClick={blipOnClick}
           {...(quadrants[1])}
         />
-        <QuadrantList {...(quadrants[1])} />
+        <QuadrantList
+          {...(quadrants[1])}
+          blipOnClick={blipOnClick}
+          />
 
-        <QuadrantList {...(quadrants[2])} />
+        <QuadrantList
+          {...(quadrants[2])}
+          blipOnClick={blipOnClick}
+          />
         <Quadrant
           maxDepth={maxDepth}
           size={size}
@@ -358,7 +372,10 @@ export const Radar: React.FC<Props> = ({ quadrants }) => {
           blipOnClick={blipOnClick}
           {...(quadrants[3])}
         />
-        <QuadrantList {...(quadrants[3])} />
+        <QuadrantList
+          {...(quadrants[3])}
+          blipOnClick={blipOnClick}
+          />
       </div>
 
       { currentBlip && (
