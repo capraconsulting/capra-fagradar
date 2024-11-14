@@ -5,4 +5,20 @@ depth: 2
 quadrant: frontend
 ---
 
-Web standard
+A [CSS Module](https://github.com/css-modules/css-modules) is a CSS file where all class names are scoped locally by default.
+
+### Why CSS Modules?
+
+- **Local Scope Prevents Clashes**:
+CSS Modules use local scope to avoid style conflicts across different project parts, allowing component-scoped styling.
+
+- **Clear Style Dependencies**:
+Importing styles into their respective components clarifies which styles impact which areas, enhancing code readability and maintenance.
+
+- **Solves Global Scope Problems**:
+CSS Modules prevent the common issue of styles in one file affecting the entire project by localizing styles to specific components.
+
+- **Boosts Reusability and Modularity**:
+CSS Modules allow the same class names in different modules, promoting modular, reusable styling.
+
+### Why put it in the current level?
