@@ -239,10 +239,27 @@ const RightAnchoredShelf: React.FC<React.PropsWithChildren> = ({ children }) => 
   );
 }
 
-const BlipInfo: React.FC<{ blip: Blip, onClose: React.MouseEventHandler<HTMLButtonElement> }> = ({ blip, onClose }) => {
+type LabelProps = React.PropsWithChildren;
+
+const Label: React.FC<LabelProps> = ({ children }) => {
+  return (
+    <div className={styles.label}>{children}</div>
+  );
+}
+
+type BlipInfoProps = {
+ blip: Blip;
+ onClose: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const BlipInfo: React.FC<BlipInfoProps> = ({ blip, onClose }) => {
   return (
     <RightAnchoredShelf>
       <h2>{blip.name}</h2>
+      <div className={styles.labelGroup}>
+        <Label>Level {blip.depth}</Label>
+        {blip.is_new && (<Label>new</Label>)}
+      </div>
       <div>{blip.element}</div>
       <button onClick={onClose}>Close</button>
     </RightAnchoredShelf>

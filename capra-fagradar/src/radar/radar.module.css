@@ -125,3 +125,21 @@
     }
   }
 }
+
+.label {
+  display: inline-block;
+  color: black;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.4rem;
+  border: 1px solid black;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-variant: small-caps;
+}
+
+.labelGroup {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
