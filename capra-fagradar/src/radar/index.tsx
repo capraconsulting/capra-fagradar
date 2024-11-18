@@ -460,7 +460,6 @@ type Props = {
 export const Radar: React.FC<Props> = ({ quadrants }) => {
   const {
     currentBlip,
-    highlightedBlip
   } = useRadarStore()
 
   const maxDepth = 4;
@@ -469,7 +468,6 @@ export const Radar: React.FC<Props> = ({ quadrants }) => {
 
   return (
     <>
-      <p>{currentBlip?.name} - {highlightedBlip?.name}</p>
       <div className={styles.quadrants}>
         <QuadrantList
           {...(quadrants[0])}
