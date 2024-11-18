@@ -1,19 +1,19 @@
-import React, { useRef } from "react";
+import React from "react";
 import { scaleLinear } from "d3-scale";
 import styles from "./radar.module.css";
 import "react-tooltip/dist/react-tooltip.css";
-import { Tooltip, TooltipRefProps } from "react-tooltip";
+import { Tooltip } from "react-tooltip";
 import { useRadarStore } from "./radar-store";
 
 export interface Blip {
   id: number;
   name: string;
-  blipNumber: number
-  logo?: string
+  blipNumber: number;
+  logo?: string;
   depth: number;
   is_new: boolean;
   element: React.ReactElement;
-  quadrant: string
+  quadrant: string;
   x: number;
   y: number;
 }
@@ -28,24 +28,26 @@ type BlipProps = {
 };
 
 const RadarBlip: React.FC<BlipProps> = ({ blip, color }) => {
-  const className = styles.blip + (blip.is_new ? ` ${styles.circleOutline}` : "");
+  const className =
+    styles.blip + (blip.is_new ? ` ${styles.circleOutline}` : "");
 
-  const ref = useRef<TooltipRefProps>()
-
-  if (ref) ref.current
-
-  const { selectBlip, highlightBlip, highlightedBlip } = useRadarStore()
+  const { selectBlip, highlightBlip, highlightedBlip } = useRadarStore();
 
   return (
     <div className={className} style={{ left: blip.x, top: blip.y }}>
       <div
         style={{
-          background: highlightedBlip?.blipNumber === blip.blipNumber ? `${color}99`
-            : color,
+          background:
+            highlightedBlip?.blipNumber === blip.blipNumber
+              ? `${color}99`
+              : color,
           borderColor: color,
-          width: '30px', height: '30px',
-          display: 'flex', flexDirection: 'row',
-          justifyContent: 'center', alignItems: 'center'
+          width: "30px",
+          height: "30px",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
         }}
         data-tooltip-id="my-tooltip"
         data-tooltip-content={blip.name}
@@ -55,7 +57,6 @@ const RadarBlip: React.FC<BlipProps> = ({ blip, color }) => {
         onClick={() => selectBlip(blip)}
       >
         {blip.blipNumber}
-        {/* <img src={blip.logo} style={{ maxWidth: '75%', maxHeight: '75%', width: 'auto', height: 'auto' }}></img> */}
       </div>
     </div>
   );
@@ -115,8 +116,8 @@ const Arc: React.FC<ArcProps> = ({ orientation, outerRadius, size }) => {
         strokeWidth={1}
       />
     </g>
-  )
-}
+  );
+};
 
 interface RadarChartProps {
   name: string;
@@ -137,7 +138,7 @@ const Quadrant: React.FC<RadarChartProps> = ({
   const margin = 4; /* px */
 
   // Define the custom cumulative fractions for each arc level
-  const cumulativeFractions = [0, 0.5, 0.7, 0.90, 1];
+  const cumulativeFractions = [0, 0.5, 0.7, 0.9, 1];
 
   const distributeBlips = (
     blips: Blip[],
@@ -217,13 +218,11 @@ const Quadrant: React.FC<RadarChartProps> = ({
       for (let row = 0; row < 3; row++) {
         const radius = rowRadii[row];
         const numBlipsInRow = blipsInRows[row].length;
-        const angleSpacing =
-          (angleEnd - angleStart) / numBlipsInRow;
+        const angleSpacing = (angleEnd - angleStart) / numBlipsInRow;
 
         for (let i = 0; i < numBlipsInRow; i++) {
           const blip = blipsInRows[row][i];
-          const angle =
-            angleStart + angleSpacing * (i + 0.5); // Offset by 0.5 to center blips
+          const angle = angleStart + angleSpacing * (i + 0.5); // Offset by 0.5 to center blips
 
           const x = radius * Math.cos(angle);
           const y = radius * Math.sin(angle);
@@ -336,11 +335,7 @@ const Quadrant: React.FC<RadarChartProps> = ({
         ))}
       </svg>
       {(flattenedArrayBlips || []).map((blip, i) => (
-        <RadarBlip
-          key={`blip-${i}`}
-          blip={blip}
-          color={blipColor}
-        />
+        <RadarBlip key={`blip-${i}`} blip={blip} color={blipColor} />
       ))}
       <Tooltip id="my-tooltip" />
       <span className={`${styles.quadrantTitle} ${styles[orientation]}`}>
@@ -350,8 +345,6 @@ const Quadrant: React.FC<RadarChartProps> = ({
   );
 };
 
-
-
 export type Quadrant = {
   name: string;
   orientation: QuadrantType;
@@ -359,44 +352,53 @@ export type Quadrant = {
   blips: Blip[];
 };
 
-const RightAnchoredShelf: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return (
-    <div className={styles.rightAnchoredShelf}>
-      {children}
-    </div>
-  );
-}
+const RightAnchoredShelf: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
+  return <div className={styles.rightAnchoredShelf}>{children}</div>;
+};
 
 type LabelProps = React.PropsWithChildren;
 
 const Label: React.FC<LabelProps> = ({ children }) => {
-  return (
-    <div className={styles.label}>{children}</div>
-  );
-}
+  return <div className={styles.label}>{children}</div>;
+};
 
 type BlipInfoProps = {
   blip: Blip;
-}
+};
 
 const BlipInfo: React.FC<BlipInfoProps> = ({ blip }) => {
-  const {
-    selectBlip
-  } = useRadarStore()
+  const { selectBlip } = useRadarStore();
   return (
     <RightAnchoredShelf>
-      <h2>{blip.name} {" "}{blip.logo ? <img alt='' src={blip.logo} style={{ maxWidth: '75%', maxHeight: '75%', width: 'auto', height: 'auto' }} /> : null}</h2>
+      <h2>
+        {blip.name}{" "}
+        {blip.logo ? (
+          <img
+            alt=""
+            src={blip.logo}
+            style={{
+              maxWidth: "75%",
+              maxHeight: "75%",
+              width: "auto",
+              height: "auto",
+            }}
+          />
+        ) : null}
+      </h2>
 
       <div className={styles.labelGroup}>
         <Label>Level {blip.depth}</Label>
-        {blip.is_new && (<Label>new</Label>)}
+        {blip.is_new && <Label>new</Label>}
       </div>
       <div>{blip.element}</div>
-      <button type="button" onClick={() => selectBlip(undefined)}>Close</button>
+      <button type="button" onClick={() => selectBlip(undefined)}>
+        Close
+      </button>
     </RightAnchoredShelf>
   );
-}
-
+};
 
 interface QuadrantListProps {
   name: string;
@@ -411,15 +413,15 @@ const QuadrantList: React.FC<QuadrantListProps> = ({
 }) => {
   const groupedBlips = Object.groupBy(
     blips,
-    ({ depth }: { depth: number }) => depth
+    ({ depth }: { depth: number }) => depth,
   );
 
-  const { selectBlip, highlightBlip, highlightedBlip } = useRadarStore()
+  const { selectBlip, highlightBlip, highlightedBlip } = useRadarStore();
   return (
     <div className={[styles.quadrantList, styles[orientation]].join(" ")}>
       <h3> {name} </h3>
       <div className={styles.quadrantListsDepth}>
-        {Object.keys(groupedBlips).map(depth => {
+        {Object.keys(groupedBlips).map((depth) => {
           const blips = (groupedBlips[Number(depth)] || []) as Blip[];
 
           return (
@@ -433,10 +435,12 @@ const QuadrantList: React.FC<QuadrantListProps> = ({
                     onMouseEnter={() => highlightBlip(blip)}
                     onMouseLeave={() => highlightBlip(undefined)}
                     style={{
-                      listStyle: 'none',
-                      textDecoration: blip.blipNumber === highlightedBlip?.blipNumber ? 'underline' : '',
+                      listStyle: "none",
+                      textDecoration:
+                        blip.blipNumber === highlightedBlip?.blipNumber
+                          ? "underline"
+                          : "",
                     }}
-
                   >
                     {blip.blipNumber} - {blip.name}
                   </li>
@@ -448,7 +452,7 @@ const QuadrantList: React.FC<QuadrantListProps> = ({
       </div>
     </div>
   );
-}
+};
 
 type Props = {
   /*
@@ -458,61 +462,32 @@ type Props = {
 };
 
 export const Radar: React.FC<Props> = ({ quadrants }) => {
-  const {
-    currentBlip,
-  } = useRadarStore()
+  const { currentBlip } = useRadarStore();
 
   const maxDepth = 4;
   const size = 480;
 
-
   return (
     <>
       <div className={styles.quadrants}>
-        <QuadrantList
-          {...(quadrants[0])}
-        />
+        <QuadrantList {...quadrants[0]} />
 
-        <Quadrant
-          maxDepth={maxDepth}
-          size={size}
-          {...(quadrants[0])}
-        />
+        <Quadrant maxDepth={maxDepth} size={size} {...quadrants[0]} />
 
-        <Quadrant
-          maxDepth={maxDepth}
-          size={size}
-          {...(quadrants[1])}
-        />
+        <Quadrant maxDepth={maxDepth} size={size} {...quadrants[1]} />
 
-        <QuadrantList
-          {...(quadrants[1])}
-        />
+        <QuadrantList {...quadrants[1]} />
 
-        <QuadrantList
-          {...(quadrants[2])}
-        />
+        <QuadrantList {...quadrants[2]} />
 
-        <Quadrant
-          maxDepth={maxDepth}
-          size={size}
-          {...(quadrants[2])}
-        />
+        <Quadrant maxDepth={maxDepth} size={size} {...quadrants[2]} />
 
-        <Quadrant
-          maxDepth={maxDepth}
-          size={size}
-          {...(quadrants[3])}
-        />
+        <Quadrant maxDepth={maxDepth} size={size} {...quadrants[3]} />
 
-        <QuadrantList
-          {...(quadrants[3])}
-        />
+        <QuadrantList {...quadrants[3]} />
       </div>
 
-      {currentBlip && (
-        <BlipInfo blip={currentBlip} />
-      )}
+      {currentBlip && <BlipInfo blip={currentBlip} />}
     </>
   );
 };
