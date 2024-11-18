@@ -1,6 +1,6 @@
 .rightAnchoredShelf {
   position: fixed;
-  width: 45vw;
+  width: 25vw;
   top: 10rem;
   right: 0;
   background: white;
@@ -9,6 +9,9 @@
   padding: 2rem;
   border-radius: 1rem 0 0 1rem;
   z-index: 100;
+  p {
+    max-width: 50ch;
+  }
 }
 
 .quadrants {
@@ -92,7 +95,7 @@
 }
 
 .quadrantList {
-  font-size: 12px;
+  font-size: 0.9rem;
 
   h3 {
     text-transform: capitalize;
