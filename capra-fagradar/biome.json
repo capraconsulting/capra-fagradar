@@ -19,7 +19,16 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "a11y": {
+        "useKeyWithClickEvents": "off"
+      },
+      "suspicious": {
+        "noArrayIndexKey": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off"
+      }
     }
   },
   "javascript": {
@@ -30,6 +39,9 @@
   "json": {
     "formatter": {
       "enabled": true
+    },
+    "linter": {
+      "enabled": false
     }
   },
   "css": {

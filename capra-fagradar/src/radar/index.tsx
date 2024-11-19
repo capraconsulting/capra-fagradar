@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import { scaleLinear } from 'd3-scale';
 import styles from './radar.module.css';
 import 'react-tooltip/dist/react-tooltip.css';
@@ -226,7 +226,8 @@ const Quadrant: React.FC<RadarChartProps> = ({
           const x = radius * Math.cos(angle);
           const y = radius * Math.sin(angle);
 
-          let adjustedX, adjustedY;
+          let adjustedX: number;
+          let adjustedY: number;
           switch (quadrant) {
             case 'top-left':
               adjustedX = size - x;
@@ -255,47 +256,48 @@ const Quadrant: React.FC<RadarChartProps> = ({
       }
 
       return positionedBlips;
-    } else {
-      // For other depths, keep existing distribution logic
-      const angleMargin = degreeToRadians(20 / depth);
-      const angleScale = scaleLinear()
-        .domain([0, blips.length - 1])
-        .range([angleStart + angleMargin, angleEnd - angleMargin]);
-
-      return blips.map((blip, index) => {
-        const angle = angleScale(index);
-        const radius = (innerRadius + outerRadius) / 2;
-
-        const x = radius * Math.cos(angle);
-        const y = radius * Math.sin(angle);
-
-        let adjustedX, adjustedY;
-        switch (quadrant) {
-          case 'top-left':
-            adjustedX = size - x;
-            adjustedY = size - y;
-            break;
-          case 'top-right':
-            adjustedX = 0 + x;
-            adjustedY = size - y;
-            break;
-          case 'bottom-left':
-            adjustedX = size - x;
-            adjustedY = 0 + y;
-            break;
-          case 'bottom-right':
-            adjustedX = 0 + x;
-            adjustedY = 0 + y;
-            break;
-        }
-
-        return {
-          ...blip,
-          x: adjustedX,
-          y: adjustedY,
-        };
-      });
     }
+
+    // For other depths, keep existing distribution logic
+    const angleMargin = degreeToRadians(20 / depth);
+    const angleScale = scaleLinear()
+      .domain([0, blips.length - 1])
+      .range([angleStart + angleMargin, angleEnd - angleMargin]);
+
+    return blips.map((blip, index) => {
+      const angle = angleScale(index);
+      const radius = (innerRadius + outerRadius) / 2;
+
+      const x = radius * Math.cos(angle);
+      const y = radius * Math.sin(angle);
+
+      let adjustedX: number;
+      let adjustedY: number;
+      switch (quadrant) {
+        case 'top-left':
+          adjustedX = size - x;
+          adjustedY = size - y;
+          break;
+        case 'top-right':
+          adjustedX = 0 + x;
+          adjustedY = size - y;
+          break;
+        case 'bottom-left':
+          adjustedX = size - x;
+          adjustedY = 0 + y;
+          break;
+        case 'bottom-right':
+          adjustedX = 0 + x;
+          adjustedY = 0 + y;
+          break;
+      }
+
+      return {
+        ...blip,
+        x: adjustedX,
+        y: adjustedY,
+      };
+    });
   };
 
   const groupedBlips = Object.groupBy(
@@ -305,7 +307,7 @@ const Quadrant: React.FC<RadarChartProps> = ({
 
   const distributedBlips = Object.keys(groupedBlips).map((depth: string) => {
     return distributeBlips(
-      groupedBlips[Number(depth)] as any,
+      groupedBlips[Number(depth)] as Blip[],
       Number(depth),
       size,
       orientation,
@@ -323,7 +325,12 @@ const Quadrant: React.FC<RadarChartProps> = ({
 
   return (
     <div className={styles.quadrant}>
-      <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size}>
+      <svg
+        role="presentation"
+        viewBox={`0 0 ${size} ${size}`}
+        width={size}
+        height={size}
+      >
         {arcs.map((fraction, i) => (
           <Arc
             key={`outline-${i}`}

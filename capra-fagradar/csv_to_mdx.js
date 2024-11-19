@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// biome-ignore lint/style/useNodejsImportProtocol: <explanation>
 import fs from 'fs';
 
 const csv_filename = process.argv[2];
@@ -27,10 +28,11 @@ const csv_to_json = (csv_content) => {
     .slice(1)
     .filter((line) => line !== null)
     .map((line) => {
+      // biome-ignore lint/style/useConst: <explanation>
       let new_obj = {};
-      headers.forEach((header, i) => {
-        header = header.toLowerCase();
-        if (header == 'isnew') header = 'is_new';
+      headers.forEach((h, i) => {
+        let header = h.toLowerCase();
+        if (header === 'isnew') header = 'is_new';
 
         if (typeof line[i] !== 'undefined') {
           if (line[i] === 'FALSE') {
@@ -52,6 +54,7 @@ const json = csv_to_json(data);
 
 //console.log(JSON.stringify(json));
 
+// biome-ignore lint/complexity/noForEach: <explanation>
 json.forEach((entry) => {
   const name = entry.name
     .toLowerCase()

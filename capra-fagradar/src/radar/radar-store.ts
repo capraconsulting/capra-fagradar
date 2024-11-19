@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Blip } from '.';
+import type { Blip } from '.';
 
 type RadarState = {
   currentBlip?: Blip;
