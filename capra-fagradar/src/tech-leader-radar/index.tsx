@@ -24,25 +24,25 @@ export const TechLeaderRadar = () => {
       name: "Organisasjon",
       orientation: "top-left",
       blipColor: "rgb(71, 161, 173)",
-      blips: [...items.filter((item) => item.quadrant === "Folk")],
+      blips: [...items.filter((item) => item.quadrant === "Organisasjon")],
     },
     {
       name: "Teknologi",
       orientation: "top-right",
       blipColor: "rgb(107, 158, 120)",
-      blips: [...items.filter((item) => item.quadrant === "Organisasjon")],
+      blips: [...items.filter((item) => item.quadrant === "Teknologi")],
     },
     {
       name: "Folk",
       orientation: "bottom-left",
       blipColor: "rgb(204, 133, 10)",
-      blips: [...items.filter((item) => item.quadrant === "Prosess")],
+      blips: [...items.filter((item) => item.quadrant === "Folk")],
     },
     {
       name: "Prosess eller arbeid?",
       orientation: "bottom-right",
       blipColor: "rgb(225, 106, 124)",
-      blips: [...items.filter((item) => item.quadrant === "Teknologi")],
+      blips: [...items.filter((item) => item.quadrant === "Prosess")],
     },
   ] satisfies [Quadrant, Quadrant, Quadrant, Quadrant];
 
