@@ -124,11 +124,13 @@ interface RadarChartProps {
   blipColor?: Color;
   blips: Blip[];
   orientation: QuadrantType;
+  fractions: number[];
   maxDepth: number;
   size: number;
 }
 
 const Quadrant: React.FC<RadarChartProps> = ({
+  fractions,
   name,
   blipColor,
   blips,
@@ -136,9 +138,6 @@ const Quadrant: React.FC<RadarChartProps> = ({
   size,
 }) => {
   const margin = 4; /* px */
-
-  // Define the custom cumulative fractions for each arc level
-  const cumulativeFractions = [0, 0.5, 0.7, 0.9, 1];
 
   const distributeBlips = (
     blips: Blip[],
@@ -153,8 +152,8 @@ const Quadrant: React.FC<RadarChartProps> = ({
     const angleEnd = Math.PI / 2; // 90 degrees in radians
 
     // Adjust radius calculation using custom fractions
-    const innerFraction = cumulativeFractions[depth - 1];
-    const outerFraction = cumulativeFractions[depth];
+    const innerFraction = fractions[depth - 1];
+    const outerFraction = fractions[depth];
 
     const innerRadius = innerFraction * (size - margin);
     const outerRadius = outerFraction * (size - margin);
@@ -320,7 +319,7 @@ const Quadrant: React.FC<RadarChartProps> = ({
   const quadrantSize = size - margin;
 
   // Use custom cumulative fractions to define arcs
-  const arcs = cumulativeFractions.slice(1).reverse();
+  const arcs = fractions.slice(1).reverse();
 
   return (
     <div className={styles.quadrant}>
@@ -459,30 +458,55 @@ type Props = {
    *  List of 4 quadrants
    */
   quadrants: [Quadrant, Quadrant, Quadrant, Quadrant];
+  type: "tech-lead" | "technical";
 };
 
-export const Radar: React.FC<Props> = ({ quadrants }) => {
+const leadFractions = [0, 0.4, 0.6, 0.8, 1];
+const techFractions = [0, 0.55, 0.7, 0.85, 1];
+export const Radar: React.FC<Props> = ({ quadrants, type }) => {
   const { currentBlip } = useRadarStore();
 
   const maxDepth = 4;
   const size = 480;
+
+  const fractions = type === "tech-lead" ? leadFractions : techFractions;
 
   return (
     <>
       <div className={styles.quadrants}>
         <QuadrantList {...quadrants[0]} />
 
-        <Quadrant maxDepth={maxDepth} size={size} {...quadrants[0]} />
+        <Quadrant
+          fractions={fractions}
+          maxDepth={maxDepth}
+          size={size}
+          {...quadrants[0]}
+        />
 
-        <Quadrant maxDepth={maxDepth} size={size} {...quadrants[1]} />
+        <Quadrant
+          fractions={fractions}
+          maxDepth={maxDepth}
+          size={size}
+          {...quadrants[1]}
+        />
 
         <QuadrantList {...quadrants[1]} />
 
         <QuadrantList {...quadrants[2]} />
 
-        <Quadrant maxDepth={maxDepth} size={size} {...quadrants[2]} />
+        <Quadrant
+          fractions={fractions}
+          maxDepth={maxDepth}
+          size={size}
+          {...quadrants[2]}
+        />
 
-        <Quadrant maxDepth={maxDepth} size={size} {...quadrants[3]} />
+        <Quadrant
+          fractions={fractions}
+          maxDepth={maxDepth}
+          size={size}
+          {...quadrants[3]}
+        />
 
         <QuadrantList {...quadrants[3]} />
       </div>

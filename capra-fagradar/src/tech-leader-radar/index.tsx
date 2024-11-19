@@ -54,14 +54,14 @@ export const TechLeaderRadar = () => {
       name: "Prosess eller arbeid?",
       orientation: "bottom-right",
       blipColor: "#E16A7B",
-      blips: [...blips.filter((item) => item.quadrant === "Process")],
+      blips: [...blips.filter((item) => item.quadrant === "Prosess")],
     },
   ] satisfies [Quadrant, Quadrant, Quadrant, Quadrant];
 
   return (
     <div>
       <h1>Teknologiledelse radar</h1>
-      <Radar quadrants={quadrants} />
+      <Radar type="tech-lead" quadrants={quadrants} />
     </div>
   );
 };

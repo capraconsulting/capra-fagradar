@@ -72,7 +72,7 @@ export const TechnicalRadar = () => {
   return (
     <div>
       <h1> Teknisk radar </h1>
-      <Radar quadrants={quadrants} />
+      <Radar type="technical" quadrants={quadrants} />
     </div>
   );
 };
