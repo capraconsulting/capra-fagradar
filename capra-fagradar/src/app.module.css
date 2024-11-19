@@ -1,12 +1,12 @@
 body {
   margin: 0;
   padding: 0;
-  background: #E4FBF5;
-  font-family: 'Inter Variable', sans-serif;
+  background: #e4fbf5;
+  font-family: "Inter Variable", sans-serif;
 }
 
 .header {
-  background: #121C31;
+  background: #121c31;
   padding: 1rem 2rem;
   display: flex;
   flex-direction: row;
@@ -40,7 +40,7 @@ body {
 }
 
 .footer {
-  background: #121C31;
+  background: #121c31;
   padding: 2rem;
   display: flex;
   flex-direction: row;

@@ -4,7 +4,7 @@
   top: 10rem;
   right: 0;
   background: white;
-  border: 0.2rem solid #121C31;
+  border: 0.2rem solid #121c31;
   border-right: 0;
   padding: 2rem;
   border-radius: 1rem 0 0 1rem;
@@ -85,7 +85,7 @@
 
 .circleOutline > div::after {
   position: absolute;
-  content: '';
+  content: "";
   border-radius: 100%;
   width: 40px;
   height: 40px;
