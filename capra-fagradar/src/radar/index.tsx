@@ -1,9 +1,9 @@
-import React from "react";
-import { scaleLinear } from "d3-scale";
-import styles from "./radar.module.css";
-import "react-tooltip/dist/react-tooltip.css";
-import { Tooltip } from "react-tooltip";
-import { useRadarStore } from "./radar-store";
+import React from 'react';
+import { scaleLinear } from 'd3-scale';
+import styles from './radar.module.css';
+import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from 'react-tooltip';
+import { useRadarStore } from './radar-store';
 
 export interface Blip {
   id: number;
@@ -20,7 +20,7 @@ export interface Blip {
 
 type Color = string; // TODO: is there an html color / css color type?
 
-type QuadrantType = "top-left" | "top-right" | "bottom-left" | "bottom-right";
+type QuadrantType = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
 type BlipProps = {
   blip: Blip;
@@ -29,7 +29,7 @@ type BlipProps = {
 
 const RadarBlip: React.FC<BlipProps> = ({ blip, color }) => {
   const className =
-    styles.blip + (blip.is_new ? ` ${styles.circleOutline}` : "");
+    styles.blip + (blip.is_new ? ` ${styles.circleOutline}` : '');
 
   const { selectBlip, highlightBlip, highlightedBlip } = useRadarStore();
 
@@ -42,12 +42,12 @@ const RadarBlip: React.FC<BlipProps> = ({ blip, color }) => {
               ? `${color}99`
               : color,
           borderColor: color,
-          width: "30px",
-          height: "30px",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
+          width: '30px',
+          height: '30px',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
         data-tooltip-id="my-tooltip"
         data-tooltip-content={blip.name}
@@ -71,13 +71,13 @@ type ArcProps = {
 const Arc: React.FC<ArcProps> = ({ orientation, outerRadius, size }) => {
   const getTransform = (orientation: QuadrantType, x: number, y: number) => {
     switch (orientation) {
-      case "top-left":
+      case 'top-left':
         return `rotate(-90, ${x}, ${y}) translate(0, ${size})`;
-      case "top-right":
+      case 'top-right':
         return `rotate(0, ${x}, ${y})`;
-      case "bottom-left":
+      case 'bottom-left':
         return `rotate(180, ${x}, ${y}) translate(-${size}, ${size})`;
-      case "bottom-right":
+      case 'bottom-right':
         return `rotate(90, ${x}, ${y}) translate(-${size}, 0)`;
       default:
         return `rotate(0, ${x}, ${y})`;
@@ -228,19 +228,19 @@ const Quadrant: React.FC<RadarChartProps> = ({
 
           let adjustedX, adjustedY;
           switch (quadrant) {
-            case "top-left":
+            case 'top-left':
               adjustedX = size - x;
               adjustedY = size - y;
               break;
-            case "top-right":
+            case 'top-right':
               adjustedX = 0 + x;
               adjustedY = size - y;
               break;
-            case "bottom-left":
+            case 'bottom-left':
               adjustedX = size - x;
               adjustedY = 0 + y;
               break;
-            case "bottom-right":
+            case 'bottom-right':
               adjustedX = 0 + x;
               adjustedY = 0 + y;
               break;
@@ -271,19 +271,19 @@ const Quadrant: React.FC<RadarChartProps> = ({
 
         let adjustedX, adjustedY;
         switch (quadrant) {
-          case "top-left":
+          case 'top-left':
             adjustedX = size - x;
             adjustedY = size - y;
             break;
-          case "top-right":
+          case 'top-right':
             adjustedX = 0 + x;
             adjustedY = size - y;
             break;
-          case "bottom-left":
+          case 'bottom-left':
             adjustedX = size - x;
             adjustedY = 0 + y;
             break;
-          case "bottom-right":
+          case 'bottom-right':
             adjustedX = 0 + x;
             adjustedY = 0 + y;
             break;
@@ -372,16 +372,16 @@ const BlipInfo: React.FC<BlipInfoProps> = ({ blip }) => {
   return (
     <RightAnchoredShelf>
       <h2>
-        {blip.name}{" "}
+        {blip.name}{' '}
         {blip.logo ? (
           <img
             alt=""
             src={blip.logo}
             style={{
-              maxWidth: "75%",
-              maxHeight: "75%",
-              width: "auto",
-              height: "auto",
+              maxWidth: '75%',
+              maxHeight: '75%',
+              width: 'auto',
+              height: 'auto',
             }}
           />
         ) : null}
@@ -417,7 +417,7 @@ const QuadrantList: React.FC<QuadrantListProps> = ({
 
   const { selectBlip, highlightBlip, highlightedBlip } = useRadarStore();
   return (
-    <div className={[styles.quadrantList, styles[orientation]].join(" ")}>
+    <div className={[styles.quadrantList, styles[orientation]].join(' ')}>
       <h3> {name} </h3>
       <div className={styles.quadrantListsDepth}>
         {Object.keys(groupedBlips).map((depth) => {
@@ -434,11 +434,11 @@ const QuadrantList: React.FC<QuadrantListProps> = ({
                     onMouseEnter={() => highlightBlip(blip)}
                     onMouseLeave={() => highlightBlip(undefined)}
                     style={{
-                      listStyle: "none",
+                      listStyle: 'none',
                       textDecoration:
                         blip.blipNumber === highlightedBlip?.blipNumber
-                          ? "underline"
-                          : "",
+                          ? 'underline'
+                          : '',
                     }}
                   >
                     {blip.blipNumber} - {blip.name}
@@ -458,7 +458,7 @@ type Props = {
    *  List of 4 quadrants
    */
   quadrants: [Quadrant, Quadrant, Quadrant, Quadrant];
-  type: "tech-lead" | "technical";
+  type: 'tech-lead' | 'technical';
 };
 
 const leadFractions = [0, 0.4, 0.6, 0.8, 1];
@@ -469,7 +469,7 @@ export const Radar: React.FC<Props> = ({ quadrants, type }) => {
   const maxDepth = 4;
   const size = 480;
 
-  const fractions = type === "tech-lead" ? leadFractions : techFractions;
+  const fractions = type === 'tech-lead' ? leadFractions : techFractions;
 
   return (
     <>

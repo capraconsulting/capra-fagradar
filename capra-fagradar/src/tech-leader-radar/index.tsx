@@ -1,8 +1,8 @@
-import { createElement } from "react";
-import { Blip, Radar, type Quadrant } from "../radar";
+import { createElement } from 'react';
+import { Blip, Radar, type Quadrant } from '../radar';
 
 // Dynamically import all mdx files in current dir
-const modules = import.meta.glob("./**/*.mdx", { eager: true }) as any;
+const modules = import.meta.glob('./**/*.mdx', { eager: true }) as any;
 const unsortedBlips: Blip[] = [];
 
 let blipNumber = 1;
@@ -20,7 +20,7 @@ for (const modulePath in modules) {
   });
 }
 
-const quadrants = ["Organisasjon", "Prosess", "Folk", "Teknologi"];
+const quadrants = ['Organisasjon', 'Prosess', 'Folk', 'Teknologi'];
 
 const blips = unsortedBlips
   .sort((a, b) => (a.depth || 0) - (b.depth || 0))
@@ -33,28 +33,28 @@ const blips = unsortedBlips
 export const TechLeaderRadar = () => {
   const quadrants = [
     {
-      name: "Organisasjon",
-      orientation: "top-left",
-      blipColor: "#47A1AD",
-      blips: [...blips.filter((item) => item.quadrant === "Organisasjon")],
+      name: 'Organisasjon',
+      orientation: 'top-left',
+      blipColor: '#47A1AD',
+      blips: [...blips.filter((item) => item.quadrant === 'Organisasjon')],
     },
     {
-      name: "Teknologi",
-      orientation: "top-right",
-      blipColor: "#6B9E78",
-      blips: [...blips.filter((item) => item.quadrant === "Teknologi")],
+      name: 'Teknologi',
+      orientation: 'top-right',
+      blipColor: '#6B9E78',
+      blips: [...blips.filter((item) => item.quadrant === 'Teknologi')],
     },
     {
-      name: "Folk",
-      orientation: "bottom-left",
-      blipColor: "#CC8508",
-      blips: [...blips.filter((item) => item.quadrant === "Folk")],
+      name: 'Folk',
+      orientation: 'bottom-left',
+      blipColor: '#CC8508',
+      blips: [...blips.filter((item) => item.quadrant === 'Folk')],
     },
     {
-      name: "Prosess eller arbeid?",
-      orientation: "bottom-right",
-      blipColor: "#E16A7B",
-      blips: [...blips.filter((item) => item.quadrant === "Prosess")],
+      name: 'Prosess eller arbeid?',
+      orientation: 'bottom-right',
+      blipColor: '#E16A7B',
+      blips: [...blips.filter((item) => item.quadrant === 'Prosess')],
     },
   ] satisfies [Quadrant, Quadrant, Quadrant, Quadrant];
 
