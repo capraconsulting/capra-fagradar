@@ -1,8 +1,11 @@
 import { createElement } from 'react';
-import { Blip, Radar, type Quadrant } from '../radar';
+import { type Blip, Radar, type Quadrant } from '../radar';
+import type { ModuleNamespace } from 'vite/types/hot.js';
 
 // Dynamically import all mdx files in current dir
-const modules = import.meta.glob('./**/*.mdx', { eager: true }) as any;
+const modules = import.meta.glob('./**/*.mdx', {
+  eager: true,
+}) as ModuleNamespace;
 const unsortedBlips: Blip[] = [];
 
 let blipNumber = 1;
