@@ -6,6 +6,13 @@ import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import remarkGfm from 'remark-gfm';
 
 export default defineConfig({
+	root: 'src',
+	build: {
+		outDir: '../dist',
+		emptyOutDir: true,
+	},
+	publicDir: '../public',
+
   plugins: [
     {
       enforce: 'pre',
@@ -16,4 +23,6 @@ export default defineConfig({
     },
     react(),
   ],
+
+  base: "/capra-fagradar",
 });

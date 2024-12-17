@@ -1,6 +1,6 @@
 import type { FunctionComponent } from 'react';
 import style from './breadcrumb.module.css';
-import { useMatches } from 'react-router-dom';
+import { useMatches } from 'react-router';
 
 export const Breadcrumb = () => {
   const matches = useMatches();

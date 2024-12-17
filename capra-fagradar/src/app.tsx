@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link } from 'react-router';
 import style from './app.module.css';
 import { Breadcrumb } from './breadcrumb';
 import { Header } from './header';

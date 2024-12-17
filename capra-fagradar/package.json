@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && ./ssg.tsx",
     "preview": "vite preview",
     "test": "echo 'no test'",
     "format": "biome format",
@@ -18,22 +18,24 @@
     "d3-scale": "^4.0.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-router-dom": "^6.26.0",
+    "react-router": "0.0.0-nightly-d5ad0613b-20240620",
     "react-tooltip": "^5.28.0",
     "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@mdx-js/rollup": "^3.0.1",
-    "@types/mdx": "^2.0.13",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react-swc": "^3.5.0",
-    "remark-frontmatter": "^5.0.0",
-    "remark-gfm": "^4.0.0",
-    "remark-mdx-frontmatter": "^5.0.0",
+    "@mdx-js/rollup": "3.0.1",
+    "@types/mdx": "2.0.13",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react-swc": "3.5.0",
+    "remark-frontmatter": "5.0.0",
+    "remark-gfm": "4.0.0",
+    "remark-mdx-frontmatter": "4.0.0",
+    "stream-buffers": "3.0.3",
     "typescript": "^5.2.2",
-    "vite": "^5.3.4"
-  },
-  "packageManager": "pnpm@9.7.0+sha512.dc09430156b427f5ecfc79888899e1c39d2d690f004be70e05230b72cb173d96839587545d09429b55ac3c429c801b4dc3c0e002f653830a420fa2dd4e3cf9cf"
+    "vite": "5.2.0",
+    "vite-node": "1.6.0"
+  }
 }

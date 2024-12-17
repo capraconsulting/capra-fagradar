@@ -1,4 +1,4 @@
-import { createBrowserRouter, useRouteError, Link } from 'react-router-dom';
+import { useRouteError, Link } from 'react-router';
 import { App, MainPage } from './app.tsx';
 import { TechnicalRadar } from './technical-radar';
 import { TechLeaderRadar } from './tech-leader-radar';
@@ -18,8 +18,7 @@ const ErrorPage = () => {
   );
 };
 
-export const router = createBrowserRouter(
-  [
+const routes = [
     {
       path: '/',
       element: <App />,
@@ -58,8 +57,6 @@ export const router = createBrowserRouter(
         },
       ],
     },
-  ],
-  {
-    basename: import.meta.env.BASE_URL,
-  },
-) as any;
+];
+
+export default routes;
