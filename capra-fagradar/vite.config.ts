@@ -23,6 +23,4 @@ export default defineConfig({
     },
     react(),
   ],
-
-  base: "/capra-fagradar",
 });

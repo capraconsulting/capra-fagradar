@@ -3,7 +3,19 @@ import { build } from 'vite';
 import ssgPlugin from './ssg-for-vite.tsx';
 
 try {
-  console.log("Running Vite build with SSG setup (Static site generation)\n");
+  console.log("Running Vite build with SSG setup (Static site generation)");
+
+  const base = process.argv.slice(2).reduce((acc, arg) => {
+    if (arg.startsWith('--base=')) {
+      return arg.split('=')[1];
+    }
+    return acc;
+  }, undefined);
+  if(base) {
+    console.log(`Using base: ${base}`);
+  }
+
+  console.log("");
 
   const routes = (await import('./src/routes')).default;
 
@@ -27,6 +39,7 @@ try {
       ssgPlugin(ssgPluginConfig),
       ...(originalViteConfig.plugins),
     ],
+    base,
   });
 } catch(e) {
   console.error(e);
