@@ -20,3 +20,8 @@ And start the development server with
 cd capra-fagradar
 pnpm dev
 ```
+
+---
+# How to contribute
+
+This section is under development.
