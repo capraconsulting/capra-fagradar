@@ -1,7 +1,10 @@
 .rightAnchoredShelf {
   position: fixed;
   width: 25vw;
+  min-width: 320px;
+  max-width: 50ch;
   top: 10rem;
+  bottom: 2rem;
   right: 0;
   background: white;
   border: 0.2rem solid #121c31;
@@ -9,9 +12,23 @@
   padding: 2rem;
   border-radius: 1rem 0 0 1rem;
   z-index: 100;
+  overflow-y: auto;
   p {
     max-width: 50ch;
   }
+}
+
+.closeButton {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  background: #121c31;
+  color: white;
+  border: 0;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: 2rem;
 }
 
 .quadrants {

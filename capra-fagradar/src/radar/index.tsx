@@ -399,7 +399,11 @@ const BlipInfo: React.FC<BlipInfoProps> = ({ blip }) => {
         {blip.is_new && <Label>new</Label>}
       </div>
       <div>{blip.element}</div>
-      <button type="button" onClick={() => selectBlip(undefined)}>
+      <button
+        type="button"
+        className={styles.closeButton}
+        onClick={() => selectBlip(undefined)}
+      >
         Close
       </button>
     </RightAnchoredShelf>
