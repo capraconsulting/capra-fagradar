@@ -54,7 +54,7 @@ export const TechnicalRadar = () => {
       blips: [...blips.filter((item) => item.quadrant === 'frontend')],
     },
     {
-      name: 'software engineering',
+      name: 'Software Engineering',
       orientation: 'bottom-left',
       blipColor: '#CC8508',
       blips: [
@@ -62,7 +62,7 @@ export const TechnicalRadar = () => {
       ],
     },
     {
-      name: 'plattform',
+      name: 'Plattform',
       orientation: 'bottom-right',
       blipColor: '#DE6879',
       blips: [...blips.filter((item) => item.quadrant === 'plattform')],
