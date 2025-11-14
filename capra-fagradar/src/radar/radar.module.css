@@ -113,6 +113,7 @@
 
 .quadrantList {
   font-size: 0.9rem;
+  font-variant: tabular-nums;
 
   h3 {
     text-transform: capitalize;
